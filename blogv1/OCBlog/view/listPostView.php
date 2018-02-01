@@ -18,7 +18,7 @@
             </div>
         </header>
 <h1>Bienvenue</h1>
-<p>Derniers billets du blog :</p>
+<p>Tous les billets du blog :</p>
 
 
 <?php
@@ -46,6 +46,21 @@ while ($data = $posts->fetch())
     </div>
 <?php
 }
+
+echo '<p>Page : '; //Pour l'affichage, on centre la liste des pages
+for($i=1; $i<=$nombreDePages; $i++) //On fait notre boucle
+{
+     //On va faire notre condition
+     if($i==$pageActuelle) //Si il s'agit de la page actuelle...
+     {
+         echo ' [ '.$i.' ] '; 
+     }	
+     else //Sinon...
+     {
+          echo ' <a href="index?action=listPost&amp;id='.$i.'">'.$i.'</a> ';
+     }
+}
+
 $posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>

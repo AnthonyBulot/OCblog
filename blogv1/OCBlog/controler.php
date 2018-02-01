@@ -4,7 +4,7 @@ function __autoload($class_name){
 }
 
 class Controler {
-	public function listPosts()
+	public function homePosts()
 	{
 		$objetPost = New Posts();
     	$posts = $objetPost->homePost();
@@ -88,6 +88,32 @@ class Controler {
     	else {
     		$this->listSignalement(2);
     	}
+	}
+
+	public function listPosts($nbrpage) {
+		$objetPost = new Posts();
+		$totalPosts = $objetPost->numberPost();
+
+		$nombreDePages=ceil($totalPosts/5);
+
+		if(!(is_null($nbrpage))) {
+			$pageActuelle=intval($nbrpage);
+ 
+     		if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+     		{
+         		$pageActuelle=$nombreDePages;
+     		}
+		}
+		else // Sinon
+		{
+     		$pageActuelle = 1; // La page actuelle est la n°1    
+		}
+
+		$premiereEntree=($pageActuelle - 1) * 5; // On calcul la première entrée à lire
+
+		$posts = $objetPost->listPosts($premiereEntree);
+
+		require("view/listPostView.php");
 	}
 }
 

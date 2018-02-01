@@ -11,7 +11,7 @@ $controler = new Controler();
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            $controler->listPosts();
+            $controler->homePosts();
         }
         elseif ($_GET['action'] == 'comments') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -66,9 +66,17 @@ try {
                 $controler->deleteSignalement($_GET['id']);
             } 
         }
+        elseif ($_GET['action'] == 'listPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $controler->listPosts($_GET['id']);
+            }
+            else {
+                $controler->listPosts(null);
+            }
+        }
     }
     else {
-        $controler->listPosts();
+        $controler->homePosts();
     }
 }
 catch(NewException $e) {

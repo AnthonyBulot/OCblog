@@ -15,28 +15,9 @@ class Comments extends DbConnect
 	{	
 		$db = parent::connect();
 
-		$comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+		$comments = $db->prepare('INSERT INTO comments(id, post_id, author, comment, comment_date, signalement) VALUES(" ", ?, ?, ?, NOW(), 0)';
     	$affectedLines = $comments->execute(array($postId, $author, $comment));
     	return $affectedLines;
-	}
-
-	public function addSignalement($commentId)
-	{
-    	$db = parent::connect();
-    	$comments = $db->prepare('SELECT signalement FROM comments WHERE id = ?');
-    	$comments->execute(array($commentId));
-    	$signalement = $comments->fetch();
-    	$signalement['signalement'] += 1;
-
-    	$add = $db->prepare('UPDATE comments SET signalement = ? WHERE id = ?');
-    	$add->execute(array($signalement['signalement'], $commentId));
-    	return $add;
-	}
-
-	public function listSignalement() {
-		$db = parent::connect();
-    	$req = $db->query('SELECT id, author, comment, comment_date, signalement FROM comments ORDER BY signalement DESC LIMIT 0, 5');
-    	return $req;
 	}
 
 	public function deleteComment($id) {

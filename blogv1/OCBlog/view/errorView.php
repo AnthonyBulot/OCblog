@@ -4,6 +4,7 @@
     	<header>
     		<div>
     			<a href="index.php">Accueil</a>
+                <a href="index.php?action=listPost">Tout les Billets</a>
     			<?php if (isset($_SESSION['password'])){
     			?>
     			<a href="index.php?action=admin">Administration</a>

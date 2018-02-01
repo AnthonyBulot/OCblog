@@ -17,7 +17,7 @@ class Signalement extends DbConnect
 
 	public function listSignalement() {
 		$db = parent::connect();
-    	$req = $db->query('SELECT id, author, comment, comment_date, signalement FROM comments ORDER BY signalement DESC LIMIT 0, 5');
+    	$req = $db->query('SELECT id, author, comment, comment_date, signalement FROM comments ORDER BY signalement DESC LIMIT 0, 10');
     	return $req;
 	}
 

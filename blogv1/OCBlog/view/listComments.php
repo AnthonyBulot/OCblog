@@ -7,6 +7,7 @@
     <header>
         <div>
             <a href="index.php">Accueil</a>
+  			<a href="index.php?action=listPost">Tout les Billets</a>
             <a href="index.php?action=admin">Administration</a>
             <a href="index.php?action=deco">Déconnexion</a>
         </div>
