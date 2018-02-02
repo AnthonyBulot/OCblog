@@ -88,6 +88,12 @@ try {
                 $controler->deletePost($_GET['id']);
             }
         }
+        elseif ($_GET['action'] == 'addPost') {
+            $controler->addPost();
+        }
+        elseif ($_GET['action'] == 'postWrite'){
+            $controler->postWrite($_POST['titre'], $_POST['addPost']);
+        }
     }
     else {
         $controler->homePosts();

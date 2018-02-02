@@ -24,12 +24,13 @@
                 }
                 ?>
             </div>
-        </header> 
+        </header>         
         <section>      
             <?= $content ?>
         </section> 
         <footer>
             <p>Ce blog a été fait dans le cadre de la formation Développeur Web Junior de OpenClassrooms</p>
         </footer>
+
     </body>
 </html>

@@ -138,6 +138,22 @@ section
 	font-size: 1.3em;
 	font-weight: bold;
 }
+.addPost{
+	width: 500px;
+	height: 800px;
+}
+.texteAddPost
+{
+	width: 100%;
+	height: 25px;
+	margin-bottom: 5px;
+}
+.buttonAddPost
+{
+	margin-top: 5px;
+	width: 150px;
+	height: 35px;
+}
 
 /* Formulaire */
 .form

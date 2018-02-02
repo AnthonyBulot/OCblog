@@ -11,7 +11,7 @@
             </h3>
         
             <p class="textNews">
-                <?= nl2br(htmlspecialchars($data['content'])) ?>
+                <?= nl2br($data['content']) ?>
                 <br />
                 <?php if (isset($_SESSION['password'])){
                 ?>

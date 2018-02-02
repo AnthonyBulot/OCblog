@@ -34,4 +34,13 @@ class Posts extends DbConnect
 		$delete->execute(array($postId));
 		return $delete;
 	}
+
+	public function addPost($title, $post) {
+		$req = $this->_db->prepare('INSERT INTO posts(title, content, DATE_FORMAT) VALUES( :title, :post , NOW())');
+		$new = $req->execute(array(
+			'title' => $title,
+			'post' => $post,
+			));
+		return $new;
+	}
 }

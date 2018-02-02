@@ -151,5 +151,20 @@ class Controler {
     		$this->homePosts();
     	}
 	}
+
+	public function addPost(){
+		require ('view/addPostView.php');
+	}
+
+	public function postWrite($titre, $post){
+		$objectPost = New Posts();
+		$new = $objectPost->addPost($titre, $post);
+		if ($new === false) {
+       	 	throw new NewException('Le billet n\'a pas été ajouté !');
+    	}
+    	else {
+    		$this->homePosts();
+    	}
+	}
 }
 
