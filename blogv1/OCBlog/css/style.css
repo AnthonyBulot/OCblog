@@ -29,7 +29,7 @@ header
 	font-size: 20px;
 	text-decoration: none;
 }
-.lienMenu:visited, .lienNews:visited
+.lienMenu:visited, .lienNews:visited, .lienPage:visited, .lienComment:visited, .lienAdmin:visited
 {
 	color: black;
 }
@@ -65,13 +65,15 @@ section
 }
 .titreNews
 {
+	margin: 0px;
+	padding: 2px;
 	border-bottom: 3px black solid;
 	font-weight: bold;
 	font-size: 1.3em;
 }
 .dateNews
 {
-	font-size: 1em;
+	font-size: 0.8em;
 }
 .textNews
 {
@@ -84,9 +86,96 @@ section
 	left: 400px;
 	color: black;
 }
+.numberPages
+{
+	text-align: center;
+	font-size: 1.2em;
+}
+.lienPage
+{
+	color: black;
+}
+.titre2
+{
+	font-weight: bold;
+	font-size: 1.7em;
+	text-decoration: underline;
+}
+.comment
+{
+	margin: 20px;
+	margin-left: 0px;
+	width: 600px;
+	border: 1px black solid;
+	padding: 5px;
+}
+.author
+{
+	font-size: 1.4em;
+}
+.lienComment
+{
+	color: black;
+	text-decoration: none;
+	position: relative;
+	left: 530px
+}
+.lienAdmin
+{
+	color: black;
+	text-decoration: none;
+	position: relative;
+	margin-right: 25px;
+	left: 230px
+}
+.report
+{
+	color: red;
+	font-weight: bold;
+}
 
+/* Formulaire */
+.form
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+}
+.formComment
+{
+	padding: 5px;
+	border: 2px black solid;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+}
+.formCommentText
+{
+	margin: 0px;
+	margin-bottom: 10px;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.formCommentSubmit
+{
+	margin-top: 5px;
+}
+#connectSubmit
+{
+	margin: 5px;
+	position: relative;
+	left: 105px;
+}
 /* */
 
+.admin
+{
+	text-align: center;
+}
+
+/* */
 footer
 {
 	width: 100%;

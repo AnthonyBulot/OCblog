@@ -20,11 +20,11 @@ while ($comment = $comments->fetch())
 {
 ?>
 	<div class="comment">
-    	<p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
+    	<p><strong class="author"><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
     	<p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-    	<p>A été signaler <?= $comment['report'] ?> fois</p>
-    	<a href="index.php?action=deleteComment&amp;id=<?= $comment['id'] ?>">Supprimer le commentaire</a>
-    	<a href="index.php?action=deleteReport&amp;id=<?= $comment['id'] ?>">Enlever les signalements</a>
+    	<p>A été signaler <em class="report"><?= $comment['report'] ?></em> fois</p>
+    	<a class="lienAdmin" href="index.php?action=deleteComment&amp;id=<?= $comment['id'] ?>">Supprimer le commentaire</a>
+    	<a class="lienAdmin" href="index.php?action=deleteReport&amp;id=<?= $comment['id'] ?>">Enlever les signalements</a>
     </div>
 <?php
 }

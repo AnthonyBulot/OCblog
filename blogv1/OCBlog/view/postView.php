@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 
 <?php ob_start(); ?>
-        <h1>Billet</h1>
-        <?php $data = $post->fetch(); ?>
+    <h1 class="titre">Billet</h1>
+    <?php $data = $post->fetch(); ?>
+    <div class="allNews">
         <div class="news">
-            <h3>
+            <h3 class="titreNews">
                 <?= htmlspecialchars($data['title']) ?>
-                <em>le <?= $data['DATE_FORMAT'] ?></em>
+                <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
             </h3>
         
-            <p>
+            <p class="textNews">
                 <?= nl2br(htmlspecialchars($data['content'])) ?>
                 <br />
                 <?php if (isset($_SESSION['password'])){
                 ?>
-                        <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification">Modifier</a>
+                        <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a>
+                        <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
                 <?php
                 }
                 ?>
             </p>
         </div>
-        <h2>Commentaires</h2>
+    </div>
+        <h2 class="titre2">Commentaires</h2>
 
         <?php
         while ($comment = $comments->fetch())
         {
         ?>
             <div class="comment">            
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
+                <p><strong class="author"><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-                <p><a href="index.php?id=<?= $comment['id'] ?>&amp;action=report">Signaler</a></p>
+                <p><a class="lienComment" href="index.php?id=<?= $comment['id'] ?>&amp;action=report">Signaler</a></p>
             </div>
 
         <?php
         }
 ?>
-        <form method="post" action="index.php?id=<?= $data['id'] ?>&amp;action=addComment">
+        <form class="formComment" method="post" action="index.php?id=<?= $data['id'] ?>&amp;action=addComment">
+            <p class="formCommentText">Ajouté un commentaire</p>
             <label for="Nom_commentaire">Nom</label><input type="text" name="author" id="Nom_commentaire" />
-            <label for="Nom_commentaire">Commentaire</label><textarea rows="10" name="comment"></textarea>
-            <input type="submit" name="submit" value="Envoyer"/>
+            <label for="comment">Commentaire</label><textarea rows="10" name="comment" id="comment"></textarea>
+            <input class="formCommentSubmit" type="submit" name="submit" value="Envoyer"/>
         </form>
 <?php $content = ob_get_clean(); ?>
 

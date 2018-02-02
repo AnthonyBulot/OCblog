@@ -12,7 +12,7 @@
             <div id="menu">
                 <p><img src="css/image/logo_livre.png" alt="Logo livre"></p>
                 <a href="index.php" class="lienMenu">Accueil</a>
-                <a href="index.php?action=listPost" class="lienMenu">Tout les Billets</a>                
+                <a href="index.php?action=listPost" class="lienMenu">Chapitres</a>                
                 <?php if (isset($_SESSION['password'])){
                 ?>
                 <a href="index.php?action=admin" class="lienMenu">Administration</a>

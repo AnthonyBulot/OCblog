@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <?php ob_start(); ?>  
-    <div>
-        <form method="post" action="index.php?action=connect">
+    <form method="post" action="index.php?action=connect" class="form">
+        <div>
             <label>Mot De Passe</label>
             <input type="password" name=password />
-            <input type="submit" name="submit" />
-        </form>
-    </div>
+        </div>
+        <input id="connectSubmit" type="submit" name="submit" />
+    </form>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/template.php'); ?>

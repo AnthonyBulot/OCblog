@@ -50,7 +50,7 @@ try {
         elseif ($_GET['action'] == 'deco') {
             $controler->deconnect();
         }
-        elseif ($_GET['action'] == 'signaler') {
+        elseif ($_GET['action'] == 'report') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->report($_GET['id']);
             }           

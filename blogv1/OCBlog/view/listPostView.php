@@ -2,38 +2,39 @@
 
 <?php ob_start(); ?>
 
-<h1>Bienvenue</h1>
-<p>Tous les billets du blog :</p>
+<h1 class="titre">Billet simple pour l'Alaska</h1>
+<p class="intro">Voici toutes les histoires déjà publiées de mon livres dans l'ordre décroissant :</p>
 
-
+<div class="allNews">
 <?php
 while ($data = $posts->fetch())
 {
 ?>
     <div class="news">
-        <h3>
+        <h3 class="titreNews">
             <?= htmlspecialchars($data['title']) ?>
-            <em>le <?= $data['DATE_FORMAT'] ?></em>
+            <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
         </h3>
         
-        <p>
+        <p class="textNews">
             <?= nl2br(htmlspecialchars($data['content'])) ?>
             <br />
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Commentaires</a></em>
+            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
             <br/> 
             <?php if (isset($_SESSION['password'])){
             ?>
-                <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification">Modifier</a>
-                <a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost">Supprimer</a>
+                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a></em>
+                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
             <?php
             }
             ?>
         </p>
     </div>
 <?php
-}
-
-echo '<p>Page : '; //Pour l'affichage, on centre la liste des pages
+} ?>
+</div>
+<?php
+echo '<p class="numberPages">Page : '; //Pour l'affichage, on centre la liste des pages
 for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
 {
      //On va faire notre condition
@@ -43,7 +44,7 @@ for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
      }	
      else //Sinon...
      {
-          echo ' <a href="index?action=listPost&amp;id='.$i.'">'.$i.'</a> ';
+          echo ' <a class="lienPage" href="index?action=listPost&amp;id='.$i.'">'.$i.'</a> ';
      }
 }
 
