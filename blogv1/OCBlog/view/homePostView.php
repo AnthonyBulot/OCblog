@@ -2,36 +2,38 @@
 
 <?php ob_start(); ?>
 
-<h1>Bienvenue</h1>
-<p>Derniers billets du blog :</p>
+<h1 class="titre">Billet simple pour l'Alaska</h1>
+<p class="intro">Voici les 5 dernières histoire publiées :</p>
 
-
+<div class="allNews">
 <?php
 while ($data = $posts->fetch())
 {
 ?>
     <div class="news">
-        <h3>
+        <h3 class="titreNews">
             <?= htmlspecialchars($data['title']) ?>
-            <em>le <?= $data['DATE_FORMAT'] ?></em>
+            <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
         </h3>
         
-        <p>
+        <p class="textNews">
             <?= nl2br(htmlspecialchars($data['content'])) ?>
             <br />
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Commentaires</a></em>
+            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
             <br/> 
             <?php if (isset($_SESSION['password'])){
             ?>
-                <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification">Modifier</a>
-                <a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost">Supprimer</a>
+                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a></em>
+                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
             <?php
             }
             ?>
         </p>
     </div>
 <?php
-}
+} ?>
+</div>
+<?php
 $posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>

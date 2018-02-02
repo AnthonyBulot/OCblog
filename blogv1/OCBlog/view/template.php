@@ -3,27 +3,31 @@
     <head>
         <meta charset="utf-8" />
         <title>Blog</title>
-        <link href="public/css/style.css" rel="stylesheet" /> 
+        <link href="css/style.css" rel="stylesheet" /> 
     </head>
         
     <body>
         <header>
-            <div>
-                <a href="index.php">Accueil</a>
-                <a href="index.php?action=listPost">Tout les Billets</a>                
+            <p class="textMenu">Blog de Jean Forteroche</p>
+            <div id="menu">
+                <p><img src="css/image/logo_livre.png" alt="Logo livre"></p>
+                <a href="index.php" class="lienMenu">Accueil</a>
+                <a href="index.php?action=listPost" class="lienMenu">Tout les Billets</a>                
                 <?php if (isset($_SESSION['password'])){
                 ?>
-                <a href="index.php?action=admin">Administration</a>
-                <a href="index.php?action=deco">Déconnexion</a>
+                <a href="index.php?action=admin" class="lienMenu">Administration</a>
+                <a href="index.php?action=deco" class="lienMenu">Déconnexion</a>
                 <?php } else {
                 ?>
-                <a href="index.php?action=formConnect">Indentifiez-vous</a>
+                <a href="index.php?action=formConnect" class="lienMenu">Indentifiez-vous</a>
                 <?php                                   
                 }
                 ?>
             </div>
-        </header>        
-        <?= $content ?>
+        </header> 
+        <section>      
+            <?= $content ?>
+        </section> 
         <footer>
             <p>Ce blog a été fait dans le cadre de la formation Développeur Web Junior de OpenClassrooms</p>
         </footer>
