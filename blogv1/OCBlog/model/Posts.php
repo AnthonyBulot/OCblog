@@ -42,5 +42,11 @@ class Posts extends DbConnect
 			'post' => $post,
 			));
 		return $new;
+	} 
+
+	public function updatePost($postId, $title, $content) {
+		$add = $this->_db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
+    	$add->execute(array($title, $content, $postId));
+    	return $add;
 	}
 }

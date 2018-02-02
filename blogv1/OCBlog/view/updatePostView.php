@@ -4,7 +4,7 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>    
 
 <h1 class="titre">Billet simple pour l'Alaska</h1>
-<p class="intro">Ajouté un chapitre :</p>
+<p class="intro">Modifié un chapitre :</p>
 
 <script type="text/javascript">
     tinymce.init({
@@ -22,10 +22,10 @@
     '//www.tinymce.com/css/codepen.min.css']
 });
 </script>
-<form method="post" action="index.php?action=postWrite">
-    <input type="text" name="title" value="Votre Titre..." class="texteAddPost" />
+<form method="post" action="index.php?action=updatedPost&amp;id=<?= $post['id'] ?>">
+    <input type="text" name="title" value="<?= $post['title'] ?>" class="texteAddPost" />
     <textarea name="addPost">
-        <p>Votre Texte...</p>
+        <?= $post['content'] ?>
     </textarea>
     <input type="submit" name="submit" value="Ajouté" class="buttonAddPost">
 </form>

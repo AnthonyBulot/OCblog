@@ -92,7 +92,17 @@ try {
             $controler->addPost();
         }
         elseif ($_GET['action'] == 'postWrite'){
-            $controler->postWrite($_POST['titre'], $_POST['addPost']);
+            $controler->postWrite($_POST['title'], $_POST['addPost']);
+        }
+        elseif ($_GET['action'] == 'modification') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $controler->updatePost($_GET['id']);
+            }
+        }
+        elseif ($_GET['action'] == 'updatedPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $controler->updatedPost($_GET['id'], $_POST['title'], $_POST['addPost']);
+            }
         }
     }
     else {

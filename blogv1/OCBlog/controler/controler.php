@@ -166,5 +166,23 @@ class Controler {
     		$this->homePosts();
     	}
 	}
+
+	public function updatePost($postId){
+		$objectPost = New Posts();
+		$posts = $objectPost->getPost($postId);
+		$post = $posts->fetch();
+		require('view/updatePostView.php');		
+	}
+
+	public function updatedPost($postId, $title, $content){
+		$objectPost = New Posts();
+		$update = $objectPost->updatePost($postId, $title, $content);
+		if ($update === false) {
+       	 	throw new NewException('La modification n\'as pas eu lieu !');
+    	}
+    	else {
+    		$this->getPost($postId, false);
+    	}		
+	}
 }
 
