@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-require('NewException.php');
-require('controler.php');
-$controler = new Controler();
-
 try {
+    require('error/NewException.php');
+    require('controler/controler.php');
+    $controler = new Controler();
+
+
+
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
             $controler->homePosts();
@@ -79,12 +81,16 @@ try {
                 $controler->listPosts(null);
             }
         }
+        elseif ($_GET['action'] == 'deletePost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $controler->deletePost($_GET['id']);
+            }
+        }
     }
     else {
         $controler->homePosts();
     }
 }
 catch(NewException $e) {
-    $errorMessage = $e->getMessage();
     require('view/errorView.php');
 }

@@ -29,4 +29,9 @@ class Posts extends DbConnect
 		return $posts;
 	}
 
+	public function deletePost($postId) {
+		$delete = $this->_db->prepare('DELETE FROM posts WHERE id = ?');
+		$delete->execute(array($postId));
+		return $delete;
+	}
 }

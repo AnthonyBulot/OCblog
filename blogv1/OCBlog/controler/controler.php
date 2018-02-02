@@ -140,5 +140,16 @@ class Controler {
 
 		require("view/listPostView.php");
 	}
+
+	public function deletePost($postId) {
+		$objectPost = New Posts();
+		$delete = $objectPost->deletePost($postId);
+		if ($delete === false) {
+       	 	throw new NewException('Le billet n\'a pas été supprimé !');
+    	}
+    	else {
+    		$this->homePosts();
+    	}
+	}
 }
 

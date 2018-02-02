@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>  
     <?php 
-    	echo $errorMessage;
+    	echo '<p>' . $e . '</p>';
     ?>
 <?php $content = ob_get_clean(); ?>
 

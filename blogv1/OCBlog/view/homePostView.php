@@ -24,6 +24,7 @@ while ($data = $posts->fetch())
             <?php if (isset($_SESSION['password'])){
             ?>
                 <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification">Modifier</a>
+                <a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost">Supprimer</a>
             <?php
             }
             ?>
