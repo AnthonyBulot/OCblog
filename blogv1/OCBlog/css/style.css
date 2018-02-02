@@ -29,7 +29,7 @@ header
 	font-size: 20px;
 	text-decoration: none;
 }
-.lienMenu:visited, .lienNews:visited, .lienPage:visited, .lienComment:visited, .lienAdmin:visited
+.lienMenu:visited, .lienNews:visited, .lienPage:visited, .lienComment:visited, .lienAdmin:visited, .lienRaf:visited
 {
 	color: black;
 }
@@ -133,6 +133,11 @@ section
 	color: red;
 	font-weight: bold;
 }
+.info
+{
+	font-size: 1.3em;
+	font-weight: bold;
+}
 
 /* Formulaire */
 .form
@@ -167,6 +172,10 @@ section
 	margin: 5px;
 	position: relative;
 	left: 105px;
+}
+.lienRaf
+{
+	color: black;
 }
 /* */
 

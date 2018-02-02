@@ -3,17 +3,17 @@
 <?php ob_start(); ?>
 <?php if (isset($_SESSION['password'])){
 ?>
-<h1>Bienvenue sur votre Blog</h1>
-<p>Voici les 5 commentaire les plus signaler :</p>
-<p><a href="index.php?action=listSignalement">Rafraichir la page</a></p>
+<h1 class="titre">Bienvenue sur votre Blog</h1>
+<p class="intro">Voici les commentaires les plus signalés :</p>
+<p><a class="lienRaf" href="index.php?action=listReport">Rafraichir la page</a></p>
 
 <?php
 if ($delete == 1){ ?>
-	<p>Commentaire supprimé avec succès</p>
+	<p class="info">Commentaire supprimé avec succès</p>
 <?php
 }
 elseif ($delete == 2){ ?>
-	<p>Signalement supprimé avec succès</p>
+	<p class="info">Signalement supprimé avec succès</p>
 <?php
 }
 while ($comment = $comments->fetch())
@@ -29,7 +29,7 @@ while ($comment = $comments->fetch())
 <?php
 }
 
-echo '<p>Page : '; //Pour l'affichage, on centre la liste des pages
+echo '<p class="numberPages">Page : '; //Pour l'affichage, on centre la liste des pages
 for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
 {
      //On va faire notre condition
@@ -39,7 +39,7 @@ for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
      }  
      else //Sinon...
      {
-          echo ' <a href="index?action=listReport&amp;id='.$i.'">'.$i.'</a> ';
+          echo ' <a class="lienPage" href="index?action=listReport&amp;id='.$i.'">'.$i.'</a> ';
      }
 }
 
