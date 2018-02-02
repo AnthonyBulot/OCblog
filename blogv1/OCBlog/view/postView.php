@@ -26,13 +26,16 @@
         <h2 class="titre2">Commentaires</h2>
 
         <?php
+        if ($report == true){
+            echo '<p class="info"> Le commentaire a bien été signalé ! </p>';
+        }
         while ($comment = $comments->fetch())
         {
         ?>
             <div class="comment">            
                 <p><strong class="author"><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-                <p><a class="lienComment" href="index.php?id=<?= $comment['id'] ?>&amp;action=report">Signaler</a></p>
+                <p><a class="lienComment" href="index.php?id=<?= $comment['id'] ?>&amp;action=report&amp;postId=<?= $data['id'] ?>">Signaler</a></p>
             </div>
 
         <?php

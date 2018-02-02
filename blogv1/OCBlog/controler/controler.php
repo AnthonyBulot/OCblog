@@ -11,13 +11,13 @@ class Controler {
     	require('view/homePostView.php');
 	}
 
-	public function post()
+	public function getPost($postId, $report)
 	{
 		$objectPost = New Posts();
-    	$post = $objectPost->getPost($_GET['id']);
+    	$post = $objectPost->getPost($postId);
 
     	$objectComment = New Comments();
-    	$comments = $objectComment->getComments($_GET['id']);
+    	$comments = $objectComment->getComments($postId);
 
     	require('view/postView.php');
 	}
@@ -55,14 +55,14 @@ class Controler {
 		$this->homePosts();
 	}
 
-	public function report($commentId){
+	public function report($commentId, $postId){
 		$objectReport = New Report();
 		$report = $objectReport->addReport($commentId);
     	if ($report === false) {
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
-    		$this->homePosts();
+    		$this->getPost($postId, true);
     	}
 	}
 

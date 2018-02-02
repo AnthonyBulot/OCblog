@@ -14,7 +14,7 @@ try {
         }
         elseif ($_GET['action'] == 'comments') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->post();
+                $controler->getPost($_GET['id'], false);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de billet envoyé');
@@ -51,9 +51,11 @@ try {
             $controler->deconnect();
         }
         elseif ($_GET['action'] == 'report') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->report($_GET['id']);
-            }           
+            if (isset($_GET['postId']) && $_GET['postId'] > 0) {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $controler->report($_GET['id'], $_GET['postId']);
+                }
+            }               
         }
         elseif ($_GET['action'] == 'listReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
