@@ -29,7 +29,7 @@
             <div class="comment">            
                 <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-                <p><a href="index.php?id=<?= $comment['id'] ?>&amp;action=signaler">Signaler</a></p>
+                <p><a href="index.php?id=<?= $comment['id'] ?>&amp;action=report">Signaler</a></p>
             </div>
 
         <?php

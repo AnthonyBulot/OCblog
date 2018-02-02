@@ -12,7 +12,7 @@ class Comments extends DbConnect
 
 	public function addComment($postId, $author, $comment)
 	{	
-		$comments = $this->_db->prepare('INSERT INTO comments(id, post_id, author, comment, comment_date, signalement) VALUES(" ", ?, ?, ?, NOW(), 0)');
+		$comments = $this->_db->prepare('INSERT INTO comments(id, post_id, author, comment, comment_date, report) VALUES(" ", ?, ?, ?, NOW(), 0)');
     	$affectedLines = $comments->execute(array($postId, $author, $comment));
     	return $affectedLines;
 	}

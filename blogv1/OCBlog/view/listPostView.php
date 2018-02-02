@@ -33,10 +33,10 @@ while ($data = $posts->fetch())
 }
 
 echo '<p>Page : '; //Pour l'affichage, on centre la liste des pages
-for($i=1; $i<=$nombreDePages; $i++) //On fait notre boucle
+for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
 {
      //On va faire notre condition
-     if($i==$pageActuelle) //Si il s'agit de la page actuelle...
+     if($i==$currentPage) //Si il s'agit de la page actuelle...
      {
          echo ' [ '.$i.' ] '; 
      }	

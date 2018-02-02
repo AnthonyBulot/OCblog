@@ -50,25 +50,25 @@ try {
         }
         elseif ($_GET['action'] == 'signaler') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->signaler($_GET['id']);
+                $controler->report($_GET['id']);
             }           
         }
-        elseif ($_GET['action'] == 'listSignalement') {
+        elseif ($_GET['action'] == 'listReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->listSignalement($_GET['id'], false);
+                $controler->listReport($_GET['id'], false);
             }
             else {
-                $controler->listSignalement(null, false);
+                $controler->listReport(null, false);
             }
         }
-        elseif ($_GET['action'] == 'supprimerComment') {
+        elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->deleteComment($_GET['id']);
             }            
         }
-        elseif ($_GET['action'] == 'supprimerSignalement') {
+        elseif ($_GET['action'] == 'deleteReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->deleteSignalement($_GET['id']);
+                $controler->deleteReport($_GET['id']);
             } 
         }
         elseif ($_GET['action'] == 'listPost') {

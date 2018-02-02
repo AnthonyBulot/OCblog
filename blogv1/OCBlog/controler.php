@@ -6,39 +6,39 @@ function __autoload($class_name){
 class Controler {
 	public function homePosts()
 	{
-		$objetPost = New Posts();
-    	$posts = $objetPost->homePost();
+		$objectPost = New Posts();
+    	$posts = $objectPost->homePost();
     	require('view/homePostView.php');
 	}
 
 	public function post()
 	{
-		$objetPost = New Posts();
-    	$post = $objetPost->getPost($_GET['id']);
+		$objectPost = New Posts();
+    	$post = $objectPost->getPost($_GET['id']);
 
-    	$objetComment = New Comments();
-    	$comments = $objetComment->getComments($_GET['id']);
+    	$objectComment = New Comments();
+    	$comments = $objectComment->getComments($_GET['id']);
 
     	require('view/postView.php');
 	}
-	public function addComment($id, $author, $comment)
+	public function addComment($commentId, $author, $comment)
 	{
-		$objetComment = New Comments();
-		$affectedLines = $objetComment->addComment($id, $author, $comment);
+		$objectComment = New Comments();
+		$affectedLines = $objectComment->addComment($commentId, $author, $comment);
     	if ($affectedLines === false) {
        	 	throw new NewException('Impossible d\'ajouter le commentaire !');
     	}
     	else {
-    	    header('Location: index.php?action=comments&id=' . $id);
+    	    header('Location: index.php?action=comments&id=' . $commentId);
     	}
 	}
 
 	public function connect($password){
-		$objAdministration = New Administration();
-		$dbPassword = $objAdministration->getPassword();
+		$objectAdministration = New Administration();
+		$dbPassword = $objectAdministration->getPassword();
 		if ($dbPassword['password'] == $password) {
 			$_SESSION['password'] = $password;
-    	    header('Location: index.php?action=admin&password=' . $password);
+    	    header('Location: index.php?action=admin');
 		}
 		else{
 			throw new NewException('Mot de passe Incorect');
@@ -55,10 +55,10 @@ class Controler {
 		$this->homePosts();
 	}
 
-	public function signaler($idComment){
-		$objetComment = New Signalement();
-		$signalement = $objetComment->addSignalement($idComment);
-    	if ($signalement === false) {
+	public function report($commentId){
+		$objectReport = New Report();
+		$report = $objectReport->addReport($commentId);
+    	if ($report === false) {
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
@@ -66,77 +66,77 @@ class Controler {
     	}
 	}
 
-	public function listSignalement($numberPage, $delete){
-		$objetPost = new Signalement();
-		$objetComments = new Comments();
-		$totalPosts = $objetComments->numberComments();
+	public function listReport($page, $delete){
+		$objectReport = new Report();
+		$objectComments = new Comments();
+		$totalPosts = $objectComments->numberComments();
 
-		$nombreDePages=ceil($totalPosts/5);
+		$numberPages=ceil($totalPosts/5);
 
-		if(!(is_null($numberPage))) {
-			$pageActuelle=intval($numberPage);
+		if(!(is_null($page))) {
+			$currentPage=intval($page);
  
-     		if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+     		if($currentPage>$numberPages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
      		{
-         		$pageActuelle=$nombreDePages;
+         		$currentPage=$numberPages;
      		}
 		}
 		else // Sinon
 		{
-     		$pageActuelle = 1; // La page actuelle est la n°1    
+     		$currentPage = 1; // La page actuelle est la n°1    
 		}
 
-		$premiereEntree=($pageActuelle - 1) * 5; // On calcul la première entrée à lire
+		$firstEntry=($currentPage - 1) * 5; // On calcul la première entrée à lire
 
-		$comments = $objetPost->listSignalement($premiereEntree);
+		$comments = $objectReport->listReport($firstEntry);
 
 		require("view/listCommentsView.php");
 	}
 
-	public function deleteComment($id){
-		$objetComment = New Comments();
-		$comment = $objetComment->deleteComment($id);
+	public function deleteComment($commentId){
+		$objectComment = New Comments();
+		$comment = $objectComment->deleteComment($commentId);
 		if ($comment === false) {
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !');
     	}
     	else {
-    		$this->listSignalement(1, 1);
+    		$this->listReport(1, 1);
     	}
 	}
 
-	public function deleteSignalement($id) {
-		$objetsign = new Signalement();
-		$sign = $objetsign->deleteSignalement($id);
-		if ($sign === false) {
+	public function deleteReport($id) {
+		$objectReport = new Report();
+		$report = $objectReport->deleteReport($id);
+		if ($report === false) {
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !');
     	}
     	else {
-    		$this->listSignalement(1, 2);
+    		$this->listReport(1, 2);
     	}
 	}
 
-	public function listPosts($nbrpage) {
+	public function listPosts($page) {
 		$objetPost = new Posts();
 		$totalPosts = $objetPost->numberPost();
 
-		$nombreDePages=ceil($totalPosts/5);
+		$numberPages=ceil($totalPosts/5);
 
-		if(!(is_null($nbrpage))) {
-			$pageActuelle=intval($nbrpage);
+		if(!(is_null($page))) {
+			$currentPage=intval($page);
  
-     		if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+     		if($currentPage>$numberPages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
      		{
-         		$pageActuelle=$nombreDePages;
+         		$currentPage=$numberPages;
      		}
 		}
 		else // Sinon
 		{
-     		$pageActuelle = 1; // La page actuelle est la n°1    
+     		$currentPage = 1; // La page actuelle est la n°1    
 		}
 
-		$premiereEntree=($pageActuelle - 1) * 5; // On calcul la première entrée à lire
+		$firstEntry=($currentPage - 1) * 5; // On calcul la première entrée à lire
 
-		$posts = $objetPost->listPosts($premiereEntree);
+		$posts = $objetPost->listPosts($firstEntry);
 
 		require("view/listPostView.php");
 	}
