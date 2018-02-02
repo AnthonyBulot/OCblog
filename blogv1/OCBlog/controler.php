@@ -37,18 +37,22 @@ class Controler {
 		$objAdministration = New Administration();
 		$dbPassword = $objAdministration->getPassword();
 		if ($dbPassword['password'] == $password) {
+			$_SESSION['password'] = $password;
     	    header('Location: index.php?action=admin&password=' . $password);
 		}
 		else{
 			throw new NewException('Mot de passe Incorect');
 		}
 	}
+	public function formConnect() {
+		require ('view/connectView.php');
+	}
 	public function admin(){
 		require('view/administrationView.php');
 	}
 	public function deconnect(){
 		session_destroy();
-		$this->listPosts();
+		$this->homePosts();
 	}
 
 	public function signaler($idComment){
@@ -58,14 +62,35 @@ class Controler {
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
-    		$this->listPosts();
+    		$this->homePosts();
     	}
 	}
 
-	public function listSignalement($delete){
-		$objetComment = New Signalement();
-		$list = $objetComment->listSignalement();
-		require ('view/listComments.php');
+	public function listSignalement($numberPage, $delete){
+		$objetPost = new Signalement();
+		$objetComments = new Comments();
+		$totalPosts = $objetComments->numberComments();
+
+		$nombreDePages=ceil($totalPosts/5);
+
+		if(!(is_null($numberPage))) {
+			$pageActuelle=intval($numberPage);
+ 
+     		if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+     		{
+         		$pageActuelle=$nombreDePages;
+     		}
+		}
+		else // Sinon
+		{
+     		$pageActuelle = 1; // La page actuelle est la n°1    
+		}
+
+		$premiereEntree=($pageActuelle - 1) * 5; // On calcul la première entrée à lire
+
+		$comments = $objetPost->listSignalement($premiereEntree);
+
+		require("view/listCommentsView.php");
 	}
 
 	public function deleteComment($id){
@@ -75,7 +100,7 @@ class Controler {
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !');
     	}
     	else {
-    		$this->listSignalement(1);
+    		$this->listSignalement(1, 1);
     	}
 	}
 
@@ -86,7 +111,7 @@ class Controler {
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !');
     	}
     	else {
-    		$this->listSignalement(2);
+    		$this->listSignalement(1, 2);
     	}
 	}
 

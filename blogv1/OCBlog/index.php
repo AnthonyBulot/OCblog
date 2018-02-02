@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (isset($_GET['password'])) {
-    $_SESSION['password'] = $_GET['password'];
-}
 
 require('NewException.php');
 require('controler.php');
@@ -34,6 +31,9 @@ try {
                 throw new NewException('Erreur : aucun identifiant de billet envoyé');
             }
         }
+        elseif ($_GET['action'] == 'formConnect') {
+            $controler->formConnect();
+        }
         elseif ($_GET['action'] == 'connect') {
             if (!empty($_POST['password'])) {
                 $controler->connect($_POST['password']);
@@ -54,7 +54,12 @@ try {
             }           
         }
         elseif ($_GET['action'] == 'listSignalement') {
-            $controler->listSignalement(false);
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $controler->listSignalement($_GET['id'], false);
+            }
+            else {
+                $controler->listSignalement(null, false);
+            }
         }
         elseif ($_GET['action'] == 'supprimerComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {

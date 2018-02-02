@@ -2,9 +2,9 @@
 
 class DbConnect
 {
+	protected $_db;
 
-	public static function connect() {
-        $db = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
-        return $db;
+	public function __construct() {
+        $this->_db = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
 	}
 }
