@@ -5,8 +5,8 @@
 ?>
 
 <div class="admin">
-	<a href="index.php?action=listReport">Les Billets les plus Signaler</a>
-	<a href="index.php?action=addPost">Ajouté un billet</a>
+	<a href="index.php?action=listReport" class="lienAdminis">Les Billets les plus Signaler</a>
+	<a href="index.php?action=addPost" class="lienAdminis">Ajouté un billet</a>
 </div>
 <?php $content = ob_get_clean();
 }

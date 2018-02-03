@@ -9,6 +9,7 @@
 <?php
 while ($data = $posts->fetch())
 {
+    $content = substr($data['content'],0,50)
 ?>
     <div class="news">
         <h3 class="titreNews">
@@ -17,7 +18,9 @@ while ($data = $posts->fetch())
         </h3>
         
         <p class="textNews">
-            <?= nl2br($data['content']) ?>
+            <?php echo '' . nl2br($content) . '...'; ?>
+            <br />
+            <em><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Lire la suite</a></em>
             <br />
             <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
             <br/> 
