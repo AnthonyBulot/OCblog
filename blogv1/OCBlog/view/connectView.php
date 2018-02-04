@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<?php ob_start(); ?>  
+<?php ob_start(); ?> 
     <form method="post" action="index.php?action=connect" class="form">
         <div>
             <label>Mot De Passe</label>

@@ -27,11 +27,11 @@ class Controler {
 	public function getPost($postId, $report)
 	{
     	$post = $this->_objectPost->getPost($postId);
-
     	$comments = $this->_objectComment->getComments($postId);
 
     	require('view/postView.php');
 	}
+
 	public function addComment($commentId, $author, $comment)
 	{
 		$affectedLines = $this->_objectComment->addComment($commentId, $author, $comment);
@@ -53,15 +53,18 @@ class Controler {
 			throw new NewException('Mot de passe Incorect');
 		}
 	}
+
 	public function formConnect() {
 		require ('view/connectView.php');
 	}
+
 	public function admin(){
 		$numberPosts = $this->_objectPost->numberPost();
 		$data = $this->_objectPost->lastPost();
 
 		require('view/administrationView.php');
 	}
+
 	public function deconnect(){
 		session_destroy();
 		header('Location: index.php');

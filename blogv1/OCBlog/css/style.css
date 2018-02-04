@@ -176,7 +176,6 @@ section
 	width: 150px;
 	height: 35px;
 }
-
 .lienSuite, .lienAdminis, .lienSuite:visited, .lienAdminis:visited
 {
 	color: white;
@@ -263,4 +262,107 @@ footer
 	width: 100%;
 	text-align: center;
 	height: 50px;
+	border-top: 4px black solid;
+	margin-top: 10px;
+}
+
+
+@media all and (max-device-width: 480px)
+{
+	header
+	{
+		height: 180px;
+
+	}
+	section
+	{
+		margin-top: 190px;
+	}
+	#menu
+	{
+	position: fixed;
+	left: 5px;
+	top: 80px;
+	}
+	.lienMenu
+	{
+		font-size: 2.3em;
+	} 
+	.lienNews, .lienSuite, .lienComment
+	{
+		font-size: 1.9em;
+	}
+	.lienSuite, .lienAdminis
+	{
+		font-size: 2.5em;
+	}
+	.lienAdminReport, .lienAdminAdd
+	{
+		width: 40%;
+		height: 100px;
+		text-align: center;
+	}
+	.pSuite
+	{
+		width: 200px;
+	}
+	.textMenu
+	{
+		font-size: 2.5em;
+	}
+	.textContent
+	{
+		font-size: 1.9em;
+	}
+	.titreNews
+	{
+		font-size: 2.2em;
+	}
+	.news
+	{
+		width: 80%;
+		margin-top: 25px ;
+	}
+	.titre
+	{
+		font-size: 3.5em;
+	}
+	.intro
+	{
+		font-size: 2.6em;
+	}
+	.comment
+	{
+		width: 80%;
+	}
+	.textComment, .formComment
+	{
+		font-size: 2.1em;
+	}
+	.formComment
+	{
+		width: 95%;
+	}
+	#Nom_commentaire
+	{
+		height: 70px;
+	}
+	#comment
+	{
+		height: 250px;
+	}
+	.formCommentSubmit
+	{
+		height: 50px;
+		margin-top: 15px;
+		font-size: 1.2em;
+	}
+	footer, .titre2
+	{
+		font-size: 2.5em;
+	}
+}
+
+@media screen and (max-width: 1200px)
+{
 }

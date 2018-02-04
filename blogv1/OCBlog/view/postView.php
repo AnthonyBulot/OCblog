@@ -10,17 +10,15 @@
                 <em class="dateNews">le <?= $data['date_fr'] ?></em>
             </h3>
         
-            <p class="textNews">
-                <div class="textContent"><?= nl2br($data['content']) ?></div>
-                <br />
-                <?php if (isset($_SESSION['password'])){
-                ?>
-                        <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a>
-                        <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
-                <?php
-                }
-                ?>
-            </p>
+            <div class="textContent"><?= nl2br($data['content']) ?></div>
+            <br />
+            <?php if (isset($_SESSION['password'])){
+            ?>
+                <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a>
+                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
+            <?php
+            }
+            ?>
         </div>
     </div>
         <h2 class="titre2">Commentaires</h2>
@@ -33,8 +31,8 @@
         {
         ?>
             <div class="comment">            
-                <p><strong class="author"><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date'] ?></p>
-                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p class="textComment"><strong class="author"><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_datefr'] ?></p>
+                <p class="textComment"><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                 <p><a class="lienComment" href="index.php?id=<?= $comment['id'] ?>&amp;action=report&amp;postId=<?= $data['id'] ?>">Signaler</a></p>
             </div>
 

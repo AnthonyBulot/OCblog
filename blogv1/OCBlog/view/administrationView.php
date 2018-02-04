@@ -21,10 +21,10 @@
         </h3>
         
         <p class="textNews">
-            <?php echo '' . nl2br($content) . '...'; ?>
+            <?php echo '<div class="textContent">' . nl2br($content) . '...</div>'; ?>
             <br />
-            <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Lire la suite</a></p>
-            <br />
+            <p class="pSuite"><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienSuite">Lire la suite</a></p>
+            <br/>
             <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
             <br/> 
             <?php if (isset($_SESSION['password'])){
@@ -35,7 +35,7 @@
             }
             ?>
         </p>
-    </div>
+</div>
 <?php $content = ob_get_clean();
 }
 else{
