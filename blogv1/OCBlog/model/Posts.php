@@ -29,6 +29,11 @@ class Posts extends DbConnect
 		return $posts;
 	}
 
+	public function lastPost(){
+		$posts= $this->_db->query('SELECT id, title, content, DATE_FORMAT FROM posts ORDER BY DATE_FORMAT DESC LIMIT 0, 1');
+		return $posts->fetch();
+	}
+
 	public function deletePost($postId) {
 		$delete = $this->_db->prepare('DELETE FROM posts WHERE id = ?');
 		$delete->execute(array($postId));

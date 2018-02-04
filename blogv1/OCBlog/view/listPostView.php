@@ -20,7 +20,7 @@ while ($data = $posts->fetch())
         <p class="textNews">
             <?php echo '' . nl2br($content) . '...'; ?>
             <br />
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienSuite">Lire la suite</a></em>
+            <p class="pSuite"><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienSuite">Lire la suite</a></p>
             <br/>
             <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
             <br/> 

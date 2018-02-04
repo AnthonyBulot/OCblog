@@ -4,27 +4,37 @@ function __autoload($class_name){
 }
 
 class Controler {
+	protected $_objectPost;
+	protected $_objectComment;
+	protected $_objectReport;
+	protected $_objectAdministration;
+
+	public function __construct()
+	{
+		$this->_objectPost = New Posts();
+		$this->_objectComment = New Comments();
+		$this->_objectReport = New Report();
+		$this->_objectAdministration = New Administration();
+	}
+
+
 	public function homePosts()
 	{
-		$objectPost = New Posts();
-    	$posts = $objectPost->homePost();
+    	$posts = $this->_objectPost->homePost();
     	require('view/homePostView.php');
 	}
 
 	public function getPost($postId, $report)
 	{
-		$objectPost = New Posts();
-    	$post = $objectPost->getPost($postId);
+    	$post = $this->_objectPost->getPost($postId);
 
-    	$objectComment = New Comments();
-    	$comments = $objectComment->getComments($postId);
+    	$comments = $this->_objectComment->getComments($postId);
 
     	require('view/postView.php');
 	}
 	public function addComment($commentId, $author, $comment)
 	{
-		$objectComment = New Comments();
-		$affectedLines = $objectComment->addComment($commentId, $author, $comment);
+		$affectedLines = $this->_objectComment->addComment($commentId, $author, $comment);
     	if ($affectedLines === false) {
        	 	throw new NewException('Impossible d\'ajouter le commentaire !');
     	}
@@ -34,8 +44,7 @@ class Controler {
 	}
 
 	public function connect($password){
-		$objectAdministration = New Administration();
-		$dbPassword = $objectAdministration->getPassword();
+		$dbPassword = $this->_objectAdministration->getPassword();
 		if ($dbPassword['password'] == $password) {
 			$_SESSION['password'] = $password;
     	    header('Location: index.php?action=admin');
@@ -48,6 +57,9 @@ class Controler {
 		require ('view/connectView.php');
 	}
 	public function admin(){
+		$numberPosts = $this->_objectPost->numberPost();
+		$data = $this->_objectPost->lastPost();
+
 		require('view/administrationView.php');
 	}
 	public function deconnect(){
@@ -56,8 +68,7 @@ class Controler {
 	}
 
 	public function report($commentId, $postId){
-		$objectReport = New Report();
-		$report = $objectReport->addReport($commentId);
+		$report = $this->_objectReport->addReport($commentId);
     	if ($report === false) {
        	 	throw new NewException('Echec du signalement !');
     	}
@@ -67,9 +78,7 @@ class Controler {
 	}
 
 	public function listReport($page, $delete){
-		$objectReport = new Report();
-		$objectComments = new Comments();
-		$totalPosts = $objectComments->numberComments();
+		$totalPosts = $this->_objectComment->numberComments();
 
 		$numberPages=ceil($totalPosts/5);
 
@@ -88,14 +97,13 @@ class Controler {
 
 		$firstEntry=($currentPage - 1) * 5; // On calcul la première entrée à lire
 
-		$comments = $objectReport->listReport($firstEntry);
+		$comments = $this->_objectReport->listReport($firstEntry);
 
 		require("view/listCommentsView.php");
 	}
 
 	public function deleteComment($commentId){
-		$objectComment = New Comments();
-		$comment = $objectComment->deleteComment($commentId);
+		$comment = $this->_objectComment->deleteComment($commentId);
 		if ($comment === false) {
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !');
     	}
@@ -105,8 +113,7 @@ class Controler {
 	}
 
 	public function deleteReport($id) {
-		$objectReport = new Report();
-		$report = $objectReport->deleteReport($id);
+		$report = $this->_objectReport->deleteReport($id);
 		if ($report === false) {
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !');
     	}
@@ -116,8 +123,7 @@ class Controler {
 	}
 
 	public function listPosts($page) {
-		$objetPost = new Posts();
-		$totalPosts = $objetPost->numberPost();
+		$totalPosts = $this->_objectPost->numberPost();
 
 		$numberPages=ceil($totalPosts/5);
 
@@ -136,14 +142,13 @@ class Controler {
 
 		$firstEntry=($currentPage - 1) * 5; // On calcul la première entrée à lire
 
-		$posts = $objetPost->listPosts($firstEntry);
+		$posts = $this->_objectPost->listPosts($firstEntry);
 
 		require("view/listPostView.php");
 	}
 
 	public function deletePost($postId) {
-		$objectPost = New Posts();
-		$delete = $objectPost->deletePost($postId);
+		$delete = $this->_objectPost->deletePost($postId);
 		if ($delete === false) {
        	 	throw new NewException('Le billet n\'a pas été supprimé !');
     	}
@@ -157,8 +162,7 @@ class Controler {
 	}
 
 	public function postWrite($titre, $post){
-		$objectPost = New Posts();
-		$new = $objectPost->addPost($titre, $post);
+		$new = $this->_objectPost->addPost($titre, $post);
 		if ($new === false) {
        	 	throw new NewException('Le billet n\'a pas été ajouté !');
     	}
@@ -168,15 +172,13 @@ class Controler {
 	}
 
 	public function updatePost($postId){
-		$objectPost = New Posts();
-		$posts = $objectPost->getPost($postId);
+		$posts = $this->_objectPost->getPost($postId);
 		$post = $posts->fetch();
 		require('view/updatePostView.php');		
 	}
 
 	public function updatedPost($postId, $title, $content){
-		$objectPost = New Posts();
-		$update = $objectPost->updatePost($postId, $title, $content);
+		$update = $this->_objectPost->updatePost($postId, $title, $content);
 		if ($update === false) {
        	 	throw new NewException('La modification n\'as pas eu lieu !');
     	}

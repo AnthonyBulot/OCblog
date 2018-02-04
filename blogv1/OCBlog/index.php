@@ -55,7 +55,13 @@ try {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
                     $controler->report($_GET['id'], $_GET['postId']);
                 }
-            }               
+                else {
+                    throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+                }
+            } 
+            else {
+                throw new NewException('Erreur : aucun identifiant de billet envoyé');
+            }              
         }
         elseif ($_GET['action'] == 'listReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -68,12 +74,20 @@ try {
         elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->deleteComment($_GET['id']);
-            }            
+            }
+            else {
+                throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            }
+
         }
         elseif ($_GET['action'] == 'deleteReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->deleteReport($_GET['id']);
-            } 
+            }
+            else {
+                throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            }
+
         }
         elseif ($_GET['action'] == 'listPost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -87,6 +101,9 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->deletePost($_GET['id']);
             }
+            else {
+                throw new NewException('Erreur : aucun identifiant de billet envoyé');
+            }
         }
         elseif ($_GET['action'] == 'addPost') {
             $controler->addPost();
@@ -98,10 +115,16 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->updatePost($_GET['id']);
             }
+            else {
+                throw new NewException('Erreur : aucun identifiant de billet envoyé');
+            }
         }
         elseif ($_GET['action'] == 'updatedPost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controler->updatedPost($_GET['id'], $_POST['title'], $_POST['addPost']);
+            }
+            else {
+                throw new NewException('Erreur : aucun identifiant de billet envoyé');
             }
         }
     }

@@ -28,7 +28,7 @@ header
 	font-size: 20px;
 	text-decoration: none;
 }
-.lienMenu:visited, .lienNews:visited, .lienPage:visited, .lienComment:visited, .lienAdmin:visited, .lienRaf:visited, .lienSuite:visited, .lienAdminis:visited
+.lienMenu:visited, .lienNews:visited, .lienPage:visited, .lienComment:visited, .lienAdmin:visited, .lienRaf:visited, .lienAdminis:visited
 {
 	color: black;
 }
@@ -90,7 +90,7 @@ section
 	text-align: center;
 	font-size: 1.2em;
 }
-.lienPage, .lienSuite
+.lienPage
 {
 	color: black;
 }
@@ -157,10 +157,33 @@ section
 	width: 150px;
 	height: 35px;
 }
-.lienAdminis
+
+.lienSuite, .lienAdminis, .lienSuite:visited, .lienAdminis:visited
 {
-	color: black;
+	color: white;
 	text-decoration: none;
+}
+.pSuite
+{
+	margin-left: 5px;
+	padding: 4px;
+	border: 1px black solid;
+	border-radius: 2px;
+	width: 78px;
+	background-color: black;
+}
+.adminNumber
+{
+	font-size: 1.5em;
+}
+.lienAdminReport, .lienAdminAdd
+{
+	border: 1px black solid;
+	border-radius: 2px;
+	padding: 4px;
+	width: 92px;
+	background-color: black;
+	margin: 5px;
 }
 
 /* Formulaire */
@@ -206,7 +229,8 @@ section
 .admin
 {
 	display: flex;
-	flex-direction: column;	
+	align-items: center;
+	justify-content: center;
 }
 
 /* */
