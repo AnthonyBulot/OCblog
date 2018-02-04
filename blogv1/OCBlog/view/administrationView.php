@@ -17,7 +17,7 @@
 <div class="news">
         <h3 class="titreNews">
             <?= htmlspecialchars($data['title']) ?>
-            <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
+            <em class="dateNews">le <?= $data['date_fr'] ?></em>
         </h3>
         
         <p class="textNews">

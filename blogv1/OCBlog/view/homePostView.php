@@ -14,24 +14,22 @@ while ($data = $posts->fetch())
     <div class="news">
         <h3 class="titreNews">
             <?= htmlspecialchars($data['title']) ?>
-            <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
+            <em class="dateNews">le <?= $data['date_fr'] ?></em>
         </h3>
         
-        <p class="textNews">
-            <?php echo '' . nl2br($content) . '...'; ?>
-            <br />
-            <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Lire la suite</a></p>
-            <br />
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
-            <br/> 
-            <?php if (isset($_SESSION['password'])){
-            ?>
-                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a></em>
-                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
-            <?php
-            }
-            ?>
-        </p>
+        <?php echo '<div class="textContent">' . nl2br($content) . '...</div>'; ?>
+        <br />
+        <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Lire la suite</a></p>
+        <br />
+        <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
+        <br/> 
+        <?php if (isset($_SESSION['password'])){
+        ?>
+            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a></em>
+            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
+        <?php
+        }
+        ?>
     </div>
 <?php
 } ?>

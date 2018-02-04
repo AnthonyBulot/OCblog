@@ -79,6 +79,7 @@ section
 	width: 550px;
 	border: 2px black solid;
 	margin: 5px;
+	padding-bottom: 3px;
 }
 .titreNews
 {
@@ -202,6 +203,11 @@ section
 	width: 92px;
 	background-color: black;
 	margin: 5px;
+}
+.textContent
+{
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 /* Formulaire */

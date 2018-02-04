@@ -14,11 +14,11 @@ while ($data = $posts->fetch())
     <div class="news">
         <h3 class="titreNews">
             <?= htmlspecialchars($data['title']) ?>
-            <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
+            <em class="dateNews">le <?= $data['date_fr'] ?></em>
         </h3>
         
         <p class="textNews">
-            <?php echo '' . nl2br($content) . '...'; ?>
+            <?php echo '<div class="textContent">' . nl2br($content) . '...</div>'; ?>
             <br />
             <p class="pSuite"><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienSuite">Lire la suite</a></p>
             <br/>

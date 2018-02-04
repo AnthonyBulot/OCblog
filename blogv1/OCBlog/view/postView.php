@@ -7,11 +7,11 @@
         <div class="news">
             <h3 class="titreNews">
                 <?= htmlspecialchars($data['title']) ?>
-                <em class="dateNews">le <?= $data['DATE_FORMAT'] ?></em>
+                <em class="dateNews">le <?= $data['date_fr'] ?></em>
             </h3>
         
             <p class="textNews">
-                <?= nl2br($data['content']) ?>
+                <div class="textContent"><?= nl2br($data['content']) ?></div>
                 <br />
                 <?php if (isset($_SESSION['password'])){
                 ?>

@@ -5,13 +5,13 @@ class Posts extends DbConnect
 {
 	public function homePost()
 	{
-    	$req = $this->_db->query('SELECT id, title, content, DATE_FORMAT FROM posts ORDER BY DATE_FORMAT DESC LIMIT 0, 5');
+    	$req = $this->_db->query('SELECT id, title, content, DATE_FORMAT(datefr, \'%d/%m/%Y %H:%i:%s\') AS date_fr FROM posts ORDER BY date_fr DESC LIMIT 0, 5');
     	return $req;
 	}
 
 	public function getPost($postId)
 	{
-    	$post = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT FROM posts WHERE id = ?');
+    	$post = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(datefr, \'%d/%m/%Y %H:%i:%s\') AS date_fr FROM posts WHERE id = ?');
 		$post->execute(array($postId));
     	return $post;
 	}
@@ -25,12 +25,12 @@ class Posts extends DbConnect
 	}
 
 	public function listPosts($first){
-		$posts= $this->_db->query('SELECT id, title, content, DATE_FORMAT FROM posts ORDER BY DATE_FORMAT DESC LIMIT ' . $first . ', 5');
+		$posts= $this->_db->query('SELECT id, title, content, DATE_FORMAT(datefr, \'%d/%m/%Y %H:%i:%s\') AS date_fr FROM posts ORDER BY date_fr DESC LIMIT ' . $first . ', 5');
 		return $posts;
 	}
 
 	public function lastPost(){
-		$posts= $this->_db->query('SELECT id, title, content, DATE_FORMAT FROM posts ORDER BY DATE_FORMAT DESC LIMIT 0, 1');
+		$posts= $this->_db->query('SELECT id, title, content, DATE_FORMAT(datefr, \'%d/%m/%Y %H:%i:%s\') AS date_fr FROM posts ORDER BY date_fr DESC LIMIT 0, 1');
 		return $posts->fetch();
 	}
 
@@ -41,7 +41,7 @@ class Posts extends DbConnect
 	}
 
 	public function addPost($title, $post) {
-		$req = $this->_db->prepare('INSERT INTO posts(title, content, DATE_FORMAT) VALUES( :title, :post , NOW())');
+		$req = $this->_db->prepare('INSERT INTO posts(title, content, datefr) VALUES( :title, :post , NOW())');
 		$new = $req->execute(array(
 			'title' => $title,
 			'post' => $post,
