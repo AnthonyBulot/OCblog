@@ -64,7 +64,7 @@ class Controler {
 	}
 	public function deconnect(){
 		session_destroy();
-		$this->homePosts();
+		header('Location: index.php');
 	}
 
 	public function report($commentId, $postId){

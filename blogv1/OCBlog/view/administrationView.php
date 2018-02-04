@@ -2,10 +2,10 @@
 
 <?php ob_start(); ?>
 <?php if (isset($_SESSION['password'])){
-	$content = substr($data['content'],0,50)
+	$content = substr($data['content'],0,100)
 
 ?>
-<p class="intro">Bonjour Jean Forteroche</p>
+<h1 class="titre">Bonjour Jean Forteroche</h1>
 <p class="adminNumber">Vous avez publié <em class="report"><?= $numberPosts ?></em> posts depuis le début ! </p>
 <div class="admin">
 	<p class="lienAdminReport"><a href="index.php?action=listReport" class="lienAdminis">Les Billets les plus Signaler</a></p>

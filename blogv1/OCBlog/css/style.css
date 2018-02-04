@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'calligraffitiregular';
+    src: url('webfont/calligraffiti_regular_macroman/Calligraffiti-webfont.eot');
+    src: url('webfont/calligraffiti_regular_macroman/Calligraffiti-webfont.eot?#iefix') format('embedded-opentype'),
+         url('webfont/calligraffiti_regular_macroman/Calligraffiti-webfont.woff2') format('woff2'),
+         url('webfont/calligraffiti_regular_macroman/Calligraffiti-webfont.woff') format('woff'),
+         url('webfont/calligraffiti_regular_macroman/Calligraffiti-webfont.ttf') format('truetype'),
+         url('webfont/calligraffiti_regular_macroman/Calligraffiti-webfont.svg#calligraffitiregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 header
 {
 	display: flex;
@@ -19,7 +33,9 @@ header
 {
 	margin-top: 20px;
 	margin-left: 20px;
-	font-size: 1.5em;
+	font-size: 1.8em;
+	font-weight: bold;
+	font-family: "calligraffitiregular", Arial;
 }
 .lienMenu
 {
@@ -44,6 +60,8 @@ section
 	font-size: 2em;
 	font-weight: bold;
 	text-decoration: underline;
+	font-family: "calligraffitiregular", Arial;
+
 }
 .intro
 {

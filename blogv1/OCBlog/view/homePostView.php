@@ -9,7 +9,7 @@
 <?php
 while ($data = $posts->fetch())
 {
-    $content = substr($data['content'],0,50)
+    $content = substr($data['content'],0,100)
 ?>
     <div class="news">
         <h3 class="titreNews">
