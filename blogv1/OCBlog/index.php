@@ -3,18 +3,19 @@ session_start();
 
 try {
     require('error/NewException.php');
-    require('controler/controler.php');
-    $controler = new Controler();
-
+    require('controler/controlerFront.php');
+    require('controler/controlerBack.php');
+    $controlerF = new ControlerFront();
+    $controlerB = new ControlerBack();
 
 
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            $controler->homePosts();
+            $controlerF->homePosts();
         }
         elseif ($_GET['action'] == 'comments') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->getPost($_GET['id'], false);
+                $controlerF->getPost($_GET['id'], false);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de billet envoyé');
@@ -23,7 +24,7 @@ try {
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    $controler->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                    $controlerF->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 }
                 else {
                     throw new NewException('Erreur : tous les champs ne sont pas remplis !');
@@ -34,26 +35,26 @@ try {
             }
         }
         elseif ($_GET['action'] == 'formConnect') {
-            $controler->formConnect();
+            $controlerF->formConnect();
         }
         elseif ($_GET['action'] == 'connect') {
             if (!empty($_POST['password'])) {
-                $controler->connect($_POST['password']);
+                $controlerB->connect($_POST['password']);
             }
             else {
                 throw new NewException('Erreur : aucun mot de passe donné');
             } 
         }
         elseif ($_GET['action'] == 'admin') {
-            $controler->admin();
+            $controlerB->admin();
         }
         elseif ($_GET['action'] == 'deco') {
-            $controler->deconnect();
+            $controlerB->deconnect();
         }
         elseif ($_GET['action'] == 'report') {
             if (isset($_GET['postId']) && $_GET['postId'] > 0) {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $controler->report($_GET['id'], $_GET['postId']);
+                    $controlerF->report($_GET['id'], $_GET['postId']);
                 }
                 else {
                     throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
@@ -65,15 +66,15 @@ try {
         }
         elseif ($_GET['action'] == 'listReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->listReport($_GET['id'], false);
+                $controlerB->listReport($_GET['id'], false);
             }
             else {
-                $controler->listReport(null, false);
+                $controlerB->listReport(null, false);
             }
         }
         elseif ($_GET['action'] == 'deleteComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->deleteComment($_GET['id']);
+                $controlerB->deleteComment($_GET['id']);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
@@ -82,7 +83,7 @@ try {
         }
         elseif ($_GET['action'] == 'deleteReport') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->deleteReport($_GET['id']);
+                $controlerB->deleteReport($_GET['id']);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
@@ -91,29 +92,29 @@ try {
         }
         elseif ($_GET['action'] == 'listPost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->listPosts($_GET['id']);
+                $controlerF->listPosts($_GET['id']);
             }
             else {
-                $controler->listPosts(null);
+                $controlerF->listPosts(null);
             }
         }
         elseif ($_GET['action'] == 'deletePost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->deletePost($_GET['id']);
+                $controlerB->deletePost($_GET['id']);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de billet envoyé');
             }
         }
         elseif ($_GET['action'] == 'addPost') {
-            $controler->addPost();
+            $controlerB->addPost();
         }
         elseif ($_GET['action'] == 'postWrite'){
-            $controler->postWrite($_POST['title'], $_POST['addPost']);
+            $controlerB->postWrite($_POST['title'], $_POST['addPost']);
         }
         elseif ($_GET['action'] == 'modification') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->updatePost($_GET['id']);
+                $controlerB->updatePost($_GET['id']);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de billet envoyé');
@@ -121,7 +122,7 @@ try {
         }
         elseif ($_GET['action'] == 'updatedPost') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controler->updatedPost($_GET['id'], $_POST['title'], $_POST['addPost']);
+                $controlerB->updatedPost($_GET['id'], $_POST['title'], $_POST['addPost']);
             }
             else {
                 throw new NewException('Erreur : aucun identifiant de billet envoyé');
@@ -129,7 +130,7 @@ try {
         }
     }
     else {
-        $controler->homePosts();
+        $controlerF->homePosts();
     }
 }
 catch(NewException $e) {
