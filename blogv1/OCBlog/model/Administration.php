@@ -1,5 +1,6 @@
 <?php
 
+
 class Administration extends DbConnect{
 
 	public function getPassword()

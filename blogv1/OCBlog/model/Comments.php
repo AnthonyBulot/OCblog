@@ -1,5 +1,6 @@
 <?php
 
+
 class Comments extends DbConnect
 {
 	
