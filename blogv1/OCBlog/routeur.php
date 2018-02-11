@@ -1,7 +1,6 @@
 <?php
 
 $routeur = [
-	"homePosts" => "ControlerFront",
 	"getPost" => "ControlerFront",
 	"addComment" => "ControlerFront",
 	"formConnect" => "ControlerFront",
