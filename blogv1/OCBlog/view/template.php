@@ -15,7 +15,7 @@
                 <a href="index.php?action=listPost" class="lienMenu">Chapitres</a>                
                 <?php if (isset($_SESSION['password'])): ?>                
                 <a href="index.php?action=admin" class="lienMenu">Administration</a>
-                <a href="index.php?action=deco" class="lienMenu">Déconnexion</a>
+                <a href="index.php?action=deconnect" class="lienMenu">Déconnexion</a>
                 <?php else: ?>              
                 <a href="index.php?action=formConnect" class="lienMenu">Indentifiez-vous</a>
                 <?php                                   

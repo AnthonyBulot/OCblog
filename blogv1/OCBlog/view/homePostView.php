@@ -19,13 +19,13 @@ while ($data = $posts->fetch())
         
         <?php echo '<div class="textContent">' . nl2br($content) . '...</div>'; ?>
         <br />
-        <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=comments">Lire la suite</a></p>
+        <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=getPost">Lire la suite</a></p>
         <br />
-        <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=comments" class="lienNews">Commentaires</a></em>
+        <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienNews">Commentaires</a></em>
         <br/> 
         <?php if (isset($_SESSION['password'])){
         ?>
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a></em>
+            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=updatePost" class="lienNews">Modifier</a></em>
             <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
         <?php
         }

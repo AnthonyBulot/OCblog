@@ -14,7 +14,7 @@
             <br />
             <?php if (isset($_SESSION['password'])){
             ?>
-                <a href="index.php?id=<?= $data['id'] ?>&amp;action=modification" class="lienNews">Modifier</a>
+                <a href="index.php?id=<?= $data['id'] ?>&amp;action=updatePost" class="lienNews">Modifier</a>
                 <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
             <?php
             }
@@ -24,7 +24,7 @@
         <h2 class="titre2">Commentaires</h2>
 
         <?php
-        if ($report == true){
+        if (isset($report) && $report == true){
             echo '<p class="info"> Le commentaire a bien été signalé ! </p>';
         }
         while ($comment = $comments->fetch())

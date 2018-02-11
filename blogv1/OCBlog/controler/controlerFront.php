@@ -20,18 +20,21 @@ class ControlerFront
     	require('view/homePostView.php');
 	}
 
-	public function getPost($postId, $report)
+	public function getPost()
 	{
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de billet envoyé');
         }
-    	$post = $this->_objectPost->getPost($postId);
-    	$comments = $this->_objectComment->getComments($postId);
+        if (isset($_GET['report'])){
+        	$report = true;
+        }
+    	$post = $this->_objectPost->getPost($_GET['id']);
+    	$comments = $this->_objectComment->getComments($_GET['id']);
 
     	require('view/postView.php');
 	}
 
-	public function listPosts() {
+	public function listPost() {
 		if (isset($_GET['id']) && !($_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
@@ -61,7 +64,7 @@ class ControlerFront
 	}
 
 
-	public function addComment($postId, $author, $comment)
+	public function addComment()
 	{
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
 			throw new NewException('Erreur : aucun identifiant de billet envoyé');
@@ -70,7 +73,7 @@ class ControlerFront
             throw new NewException('Erreur : tous les champs ne sont pas remplis !');
         }
 
-		$affectedLines = $this->_objectComment->addComment($postId, $author, $comment);
+		$affectedLines = $this->_objectComment->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
     	if ($affectedLines === false) {
        	 	throw new NewException('Impossible d\'ajouter le commentaire !');
     	}
@@ -83,7 +86,7 @@ class ControlerFront
 		require ('view/connectView.php');
 	}
 
-	public function report($commentId, $postId){
+	public function report(){
 		if (!(isset($_GET['postId']) && $_GET['postId'] > 0)) {
 			throw new NewException('Erreur : aucun identifiant de billet envoyé');
         }
@@ -91,16 +94,16 @@ class ControlerFront
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
 
-		$report = $this->_objectReport->addReport($commentId);
+		$report = $this->_objectReport->addReport($_GET['id']);
     	if ($report === false) {
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
-    		$this->getPost($postId, true);
+    		header('Location: index.php?action=getPost&id=' . $_GET['postId'] . '&report=true');
     	}
 	}
 
-	public function connect($password){
+	public function connect(){
 		if (empty($_POST['password'])) {
             throw new NewException('Erreur : aucun mot de passe donné');
         } 
@@ -108,7 +111,7 @@ class ControlerFront
         $objectAdministration = New Administration();
 
 		$dbPassword = $objectAdministration->getPassword();
-		if ($dbPassword['password'] == $password) {
+		if ($dbPassword['password'] == $_POST['password']) {
 			$_SESSION['password'] = true;
     	    header('Location: index.php?action=admin');
 		}

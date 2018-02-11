@@ -8,11 +8,11 @@
 <p><a class="lienRaf" href="index.php?action=listReport">Rafraichir la page</a></p>
 
 <?php
-if ($delete == 1){ ?>
+if (isset($_GET['delete']) && $_GET['delete'] == 1){ ?>
 	<p class="info">Commentaire supprimé avec succès</p>
 <?php
 }
-elseif ($delete == 2){ ?>
+elseif (isset($_GET['delete']) && $_GET['delete'] == 2){ ?>
 	<p class="info">Signalement supprimé avec succès</p>
 <?php
 }

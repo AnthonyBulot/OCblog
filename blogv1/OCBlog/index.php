@@ -18,50 +18,54 @@ try {
     $controlerF = new ControlerFront();
 
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'listPosts') {
+        if ($_GET['action'] == 'homePosts') {
             $controlerF->homePosts();
         }
-        elseif ($_GET['action'] == 'comments') {
-            $controlerF->getPost($_GET['id'], false);
+        elseif ($_GET['action'] == 'getPost') {
+            $controlerF->getPost();
         }
         elseif ($_GET['action'] == 'addComment') {
-            $controlerF->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+            $controlerF->addComment();
         }
+
         elseif ($_GET['action'] == 'formConnect') {
             $controlerF->formConnect();
         }
         elseif ($_GET['action'] == 'connect') {
-            $controlerF->connect($_POST['password']);
+            $controlerF->connect();
         }
         elseif ($_GET['action'] == 'admin') {
             $controlerB = new ControlerBack();
             $controlerB->admin();
         }
-        elseif ($_GET['action'] == 'deco') {
+        elseif ($_GET['action'] == 'deconnect') {
             $controlerB = new ControlerBack();
             $controlerB->deconnect();
         }
+
         elseif ($_GET['action'] == 'report') {
-            $controlerF->report($_GET['id'], $_GET['postId']);              
+            $controlerF->report();              
         }
+
         elseif ($_GET['action'] == 'listReport') {
             $controlerB = new ControlerBack();
-            $controlerB->listReport($_GET['id'], false);
+            $controlerB->listReport();
         }
         elseif ($_GET['action'] == 'deleteComment') {
             $controlerB = new ControlerBack();
-            $controlerB->deleteComment($_GET['id']); 
+            $controlerB->deleteComment(); 
         }
+
         elseif ($_GET['action'] == 'deleteReport') {
             $controlerB = new ControlerBack();
-            $controlerB->deleteReport($_GET['id']);
+            $controlerB->deleteReport();
         }
         elseif ($_GET['action'] == 'listPost') {
-            $controlerF->listPosts();
+            $controlerF->listPost();
         }
         elseif ($_GET['action'] == 'deletePost') {
             $controlerB = new ControlerBack();
-            $controlerB->deletePost($_GET['id']);
+            $controlerB->deletePost();
         }
         elseif ($_GET['action'] == 'addPost') {
             $controlerB = new ControlerBack();
@@ -69,15 +73,15 @@ try {
         }
         elseif ($_GET['action'] == 'postWrite'){
             $controlerB = new ControlerBack();
-            $controlerB->postWrite($_POST['title'], $_POST['addPost']);
+            $controlerB->postWrite();
         }
-        elseif ($_GET['action'] == 'modification') {
+        elseif ($_GET['action'] == 'updatePost') {
             $controlerB = new ControlerBack();
-            $controlerB->updatePost($_GET['id']);
+            $controlerB->updatePost();
         }
         elseif ($_GET['action'] == 'updatedPost') {
             $controlerB = new ControlerBack();
-            $controlerB->updatedPost($_GET['id'], $_POST['title'], $_POST['addPost']);
+            $controlerB->updatedPost();
         }
     }
     else {

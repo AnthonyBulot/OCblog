@@ -28,17 +28,17 @@ class ControlerBack {
 		header('Location: index.php');
 	}
 
-	public function listReport($page, $delete){
-		if (!($_GET['id'] > 0)) {
-			throw new NewException('Billet Incorrect');
-		}
+	public function listReport(){
+		if (isset($_GET['id']) && !($_GET['id'] > 0)) {
+            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+        }
 
 		$totalPosts = $this->_objectComment->numberComments();
 
 		$numberPages=ceil($totalPosts/5);
 
-		if(!(is_null($page))) {
-			$currentPage=intval($page);
+		if(isset($_GET['id'])) {
+			$currentPage=intval($_GET['id']);
  
      		if($currentPage>$numberPages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
      		{
@@ -57,40 +57,40 @@ class ControlerBack {
 		require("view/listCommentsView.php");
 	}
 
-	public function deleteComment($commentId){
+	public function deleteComment(){
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
 
-		$comment = $this->_objectComment->deleteComment($commentId);
+		$comment = $this->_objectComment->deleteComment($_GET['id']);
 		if (!$comment) {
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !');
     	}
     	else {
-    		$this->listReport(1, 1);
+    		header('Location: index.php?action=listReport&id=1&delete=1');
     	}
 	}
 
-	public function deleteReport($id) {
+	public function deleteReport() {
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
 
-		$report = $this->_objectReport->deleteReport($id);
+		$report = $this->_objectReport->deleteReport($_GET['id']);
 		if (!$report) {
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !');
     	}
     	else {
-    		$this->listReport(1, 2);
+    		header('Location: index.php?action=listReport&id=1&delete=2');
     	}
 	}
 
-	public function deletePost($postId) {
+	public function deletePost() {
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
 
-		$delete = $this->_objectPost->deletePost($postId);
+		$delete = $this->_objectPost->deletePost($_GET['id']);
 		if (!$delete) {
        	 	throw new NewException('Le billet n\'a pas été supprimé !');
     	}
@@ -103,8 +103,13 @@ class ControlerBack {
 		require ('view/addPostView.php');
 	}
 
-	public function postWrite($titre, $post){
-		$new = $this->_objectPost->addPost($titre, $post);
+	public function postWrite(){
+		if (empty($_POST['title']) && empty($_POST['addPost'])) {
+            throw new NewException('Erreur : tous les champs ne sont pas remplis !');
+        }
+
+
+		$new = $this->_objectPost->addPost($_POST['title'], $_POST['addPost']);
 		if (!$new) {
        	 	throw new NewException('Le billet n\'a pas été ajouté !');
     	}
@@ -113,28 +118,30 @@ class ControlerBack {
     	}
 	}
 
-	public function updatePost($postId){
+	public function updatePost(){
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
 
-		$posts = $this->_objectPost->getPost($postId);
+		$posts = $this->_objectPost->getPost($_GET['id']);
 		$post = $posts->fetch();
 		require('view/updatePostView.php');		
 	}
 
-	public function updatedPost($postId, $title, $content){
+	public function updatedPost(){
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
         }
+		if (empty($_POST['title']) && empty($_POST['addPost'])) {
+            throw new NewException('Erreur : tous les champs ne sont pas remplis !');
+        }
 
-		$update = $this->_objectPost->updatePost($postId, $title, $content);
+		$update = $this->_objectPost->updatePost($_GET['id'], $_POST['title'], $_POST['addPost']);
 		if (!$update) {
        	 	throw new NewException('La modification n\'as pas eu lieu !');
     	}
     	else {
-    		$controlerF = new ControlerFront();
-    		$controlerF->getPost($postId, false);
+    	    header('Location: index.php?action=getPost&id=' . $_GET['id']);
     	}		
 	}
 }
