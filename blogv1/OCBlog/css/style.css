@@ -10,6 +10,11 @@
     font-style: normal;
 }
 
+body
+{
+	margin: auto;
+	/* background-color: #CCC; */
+}
 header
 {
 	display: flex;

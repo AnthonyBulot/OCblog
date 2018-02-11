@@ -1,31 +1,19 @@
 <?php
-function __autoload($class_name){
-    require('model/' . $class_name . '.php'); 
-}
 
 class ControlerBack {
 	protected $_objectPost;
 	protected $_objectComment;
 	protected $_objectReport;
-	protected $_objectAdministration;
 
 	public function __construct()
 	{
+		if (!(isset($_SESSION['password'])))
+		{
+			throw new NewException('Vous n\'avez pas accès à cette page');
+		}
 		$this->_objectPost = New Posts();
 		$this->_objectComment = New Comments();
 		$this->_objectReport = New Report();
-		$this->_objectAdministration = New Administration();
-	}
-
-	public function connect($password){
-		$dbPassword = $this->_objectAdministration->getPassword();
-		if ($dbPassword['password'] == $password) {
-			$_SESSION['password'] = $password;
-    	    header('Location: index.php?action=admin');
-		}
-		else{
-			throw new NewException('Mot de passe Incorect');
-		}
 	}
 
 	public function admin(){
@@ -41,6 +29,10 @@ class ControlerBack {
 	}
 
 	public function listReport($page, $delete){
+		if (!($_GET['id'] > 0)) {
+			throw new NewException('Billet Incorrect');
+		}
+
 		$totalPosts = $this->_objectComment->numberComments();
 
 		$numberPages=ceil($totalPosts/5);
@@ -66,8 +58,12 @@ class ControlerBack {
 	}
 
 	public function deleteComment($commentId){
+		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
+            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+        }
+
 		$comment = $this->_objectComment->deleteComment($commentId);
-		if ($comment === false) {
+		if (!$comment) {
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !');
     	}
     	else {
@@ -76,8 +72,12 @@ class ControlerBack {
 	}
 
 	public function deleteReport($id) {
+		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
+            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+        }
+
 		$report = $this->_objectReport->deleteReport($id);
-		if ($report === false) {
+		if (!$report) {
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !');
     	}
     	else {
@@ -86,8 +86,12 @@ class ControlerBack {
 	}
 
 	public function deletePost($postId) {
+		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
+            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+        }
+
 		$delete = $this->_objectPost->deletePost($postId);
-		if ($delete === false) {
+		if (!$delete) {
        	 	throw new NewException('Le billet n\'a pas été supprimé !');
     	}
     	else {
@@ -101,7 +105,7 @@ class ControlerBack {
 
 	public function postWrite($titre, $post){
 		$new = $this->_objectPost->addPost($titre, $post);
-		if ($new === false) {
+		if (!$new) {
        	 	throw new NewException('Le billet n\'a pas été ajouté !');
     	}
     	else {
@@ -110,14 +114,22 @@ class ControlerBack {
 	}
 
 	public function updatePost($postId){
+		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
+            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+        }
+
 		$posts = $this->_objectPost->getPost($postId);
 		$post = $posts->fetch();
 		require('view/updatePostView.php');		
 	}
 
 	public function updatedPost($postId, $title, $content){
+		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
+            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+        }
+
 		$update = $this->_objectPost->updatePost($postId, $title, $content);
-		if ($update === false) {
+		if (!$update) {
        	 	throw new NewException('La modification n\'as pas eu lieu !');
     	}
     	else {

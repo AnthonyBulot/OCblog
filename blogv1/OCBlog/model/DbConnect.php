@@ -1,5 +1,5 @@
 <?php
-
+//singleton
 class DbConnect
 {
 	protected $_db;
