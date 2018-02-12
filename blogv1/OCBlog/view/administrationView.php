@@ -1,12 +1,8 @@
 <!DOCTYPE html>
+<?php $data = $dataView['post'] ?>
 
-<?php ob_start(); ?>
-<?php if (isset($_SESSION['password'])){
-	$content = substr($data['content'],0,100)
-
-?>
 <h1 class="titre">Bonjour Jean Forteroche</h1>
-<p class="adminNumber">Vous avez publié <em class="report"><?= $numberPosts ?></em> posts depuis le début ! </p>
+<p class="adminNumber">Vous avez publié <em class="report"><?= $dataView['numberPosts'] ?></em> posts depuis le début ! </p>
 <div class="admin">
 	<p class="lienAdminReport"><a href="index.php?action=listReport" class="lienAdminis">Les Billets les plus Signaler</a></p>
 	<p class="lienAdminAdd"><a href="index.php?action=addPost" class="lienAdminis">Ajouté un billet</a></p>
@@ -21,7 +17,7 @@
         </h3>
         
         <p class="textNews">
-            <?php echo '<div class="textContent">' . nl2br($content) . '...</div>'; ?>
+            <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
             <br />
             <p class="pSuite"><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienSuite">Lire la suite</a></p>
             <br/>
@@ -36,10 +32,3 @@
             ?>
         </p>
 </div>
-<?php $content = ob_get_clean();
-}
-else{
-	throw new NewException('Vous n\'avez pas accès à cette page');
-}
-?>
-<?php require('view/template.php'); ?>

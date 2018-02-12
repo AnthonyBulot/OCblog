@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 
-<?php ob_start(); ?>
-<?php if (isset($_SESSION['password'])){
-?>
 <h1 class="titre">Bienvenue sur votre Blog</h1>
 <p class="intro">Voici les commentaires les plus signalés :</p>
 <p><a class="lienRaf" href="index.php?action=listReport">Rafraichir la page</a></p>
@@ -16,7 +13,7 @@ elseif (isset($_GET['delete']) && $_GET['delete'] == 2){ ?>
 	<p class="info">Signalement supprimé avec succès</p>
 <?php
 }
-while ($comment = $comments->fetch())
+while ($comment = $dataView['comments']->fetch())
 {
 ?>
 	<div class="comment">
@@ -30,10 +27,10 @@ while ($comment = $comments->fetch())
 }
 
 echo '<p class="numberPages">Page : '; //Pour l'affichage, on centre la liste des pages
-for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
+for($i=1; $i<=$dataView['numberPages']; $i++) //On fait notre boucle
 {
      //On va faire notre condition
-     if($i==$currentPage) //Si il s'agit de la page actuelle...
+     if($i==$dataView['currentPage']) //Si il s'agit de la page actuelle...
      {
          echo ' [ '.$i.' ] '; 
      }  
@@ -43,12 +40,3 @@ for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
      }
 }
 
-$comments->closeCursor();
-}
-else{
-	throw new NewException('Vous n\'avez pas accès à cette page');
-}
-?>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('view/template.php'); ?>

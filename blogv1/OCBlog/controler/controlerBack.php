@@ -1,6 +1,7 @@
 <?php
 
-class ControlerBack {
+class ControlerBack extends Controler
+{
 	protected $_objectPost;
 	protected $_objectComment;
 	protected $_objectReport;
@@ -18,9 +19,14 @@ class ControlerBack {
 
 	public function admin(){
 		$numberPosts = $this->_objectPost->numberPost();
-		$data = $this->_objectPost->lastPost();
+		$post = $this->_objectPost->lastPost();
 
-		require('view/administrationView.php');
+
+		$data = [
+			'post' => $post,
+			'numberPosts' => $numberPosts
+		];
+		$this->render('administrationView', $data);
 	}
 
 	public function deconnect(){
@@ -54,7 +60,12 @@ class ControlerBack {
 
 		$comments = $this->_objectReport->listReport($firstEntry);
 
-		require("view/listCommentsView.php");
+		$data = [
+    		'comments' => $comments,
+    		'numberPages' => $numberPages,
+    		'currentPage' => $currentPage
+    	];
+		$this->render('listCommentsView', $data);
 	}
 
 	public function deleteComment(){
@@ -100,7 +111,7 @@ class ControlerBack {
 	}
 
 	public function addPost(){
-		require ('view/addPostView.php');
+		$this->render('addPostView', null);
 	}
 
 	public function postWrite(){
@@ -125,7 +136,8 @@ class ControlerBack {
 
 		$posts = $this->_objectPost->getPost($_GET['id']);
 		$post = $posts->fetch();
-		require('view/updatePostView.php');		
+
+		$this->render('updatePostView', $post);
 	}
 
 	public function updatedPost(){

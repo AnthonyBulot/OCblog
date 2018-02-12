@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
-<?php ob_start(); ?>
     <h1 class="titre">Billet</h1>
-    <?php $data = $post->fetch(); ?>
+    <?php $data = $dataView['post']->fetch(); ?>
     <div class="allNews">
         <div class="news">
             <h3 class="titreNews">
@@ -21,13 +20,13 @@
             ?>
         </div>
     </div>
-        <h2 class="titre2">Commentaires</h2>
+    <h2 class="titre2">Commentaires</h2>
 
         <?php
-        if (isset($report) && $report == true){
+        if (isset($dataView['report']) && $dataView['report'] == true){
             echo '<p class="info"> Le commentaire a bien été signalé ! </p>';
         }
-        while ($comment = $comments->fetch())
+        while ($comment = $dataView['comments']->fetch())
         {
         ?>
             <div class="comment">            
@@ -45,6 +44,3 @@
             <label for="comment">Commentaire</label><textarea rows="10" name="comment" id="comment"></textarea>
             <input class="formCommentSubmit" type="submit" name="submit" value="Envoyer"/>
         </form>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('view/template.php'); ?>

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 
-<?php ob_start(); ?>
-
 <h1 class="titre">Billet simple pour l'Alaska</h1>
 <p class="intro">Voici les 5 dernières histoire publiées :</p>
 
 <div class="allNews">
 <?php
-while ($data = $posts->fetch())
+while ($data = $dataView['posts']->fetch())
 {
     $content = substr($data['content'],0,100)
 ?>
@@ -34,9 +32,3 @@ while ($data = $posts->fetch())
 <?php
 } ?>
 </div>
-<?php
-$posts->closeCursor();
-?>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('view/template.php'); ?>

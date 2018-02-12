@@ -22,9 +22,9 @@
                 endif;
                 ?>
             </div>
-        </header>         
+        </header>        
         <section>      
-            <?= $content ?>
+            <?php require('view/' . $view . '.php'); ?>
         </section> 
         <footer>
             <p>Ce blog a été fait dans le cadre de la formation Développeur Web Junior de OpenClassrooms</p>

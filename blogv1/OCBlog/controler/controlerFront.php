@@ -1,6 +1,6 @@
 <?php
 
-class ControlerFront
+class ControlerFront extends Controler
 {
 	protected $_objectPost;
 	protected $_objectComment;
@@ -17,7 +17,10 @@ class ControlerFront
 	public function homePosts()
 	{
     	$posts = $this->_objectPost->homePost();
-    	require('view/homePostView.php');
+    	$data = [
+    		'posts' => $posts
+    	];
+    	$this->render('homePostView', $data);
 	}
 
 	public function getPost()
@@ -28,10 +31,20 @@ class ControlerFront
         if (isset($_GET['report'])){
         	$report = true;
         }
+        else
+        {
+        	$report = null;
+        }
+        
     	$post = $this->_objectPost->getPost($_GET['id']);
     	$comments = $this->_objectComment->getComments($_GET['id']);
 
-    	require('view/postView.php');
+    	$data = [
+    		'post' => $post,
+    		'comments' => $comments,
+    		'report' => $report
+    	];
+    	$this->render('postView', $data);
 	}
 
 	public function listPost() {
@@ -60,7 +73,12 @@ class ControlerFront
 
 		$posts = $this->_objectPost->listPosts($firstEntry);
 
-		require("view/listPostView.php");
+		$data = [
+    		'posts' => $posts,
+    		'numberPages' => $numberPages,
+    		'currentPage' => $currentPage
+    	];
+		$this->render('listPostView', $data);
 	}
 
 
@@ -83,7 +101,7 @@ class ControlerFront
 	}
 
 	public function formConnect() {
-		require ('view/connectView.php');
+		$this->render('connectView', null);
 	}
 
 	public function report(){
