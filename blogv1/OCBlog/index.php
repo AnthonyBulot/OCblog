@@ -15,8 +15,11 @@ try {
     spl_autoload_register('autoloader');
 
     if (isset($_GET['action'])) {
-        $action = $_GET['action']; 
-        if ($routeur['' . $action . ''] == 'ControlerFront') {
+        $action = $_GET['action'];
+        if (!(array_key_exists($action, $routeur))) {
+            throw new NewException("Erreur 404 : Cette page n'existe pas !");  
+        }
+        elseif ($routeur['' . $action . ''] == 'ControlerFront') {
             $controler = new ControlerFront();
             $controler->$action();
         }

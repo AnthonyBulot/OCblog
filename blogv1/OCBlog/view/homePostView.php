@@ -7,7 +7,6 @@
 <?php
 while ($data = $dataView['posts']->fetch())
 {
-    $content = substr($data['content'],0,100)
 ?>
     <div class="news">
         <h3 class="titreNews">
@@ -15,7 +14,7 @@ while ($data = $dataView['posts']->fetch())
             <em class="dateNews">le <?= $data['date_fr'] ?></em>
         </h3>
         
-        <?php echo '<div class="textContent">' . nl2br($content) . '...</div>'; ?>
+        <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
         <br />
         <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=getPost">Lire la suite</a></p>
         <br />

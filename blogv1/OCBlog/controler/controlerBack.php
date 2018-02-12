@@ -119,8 +119,11 @@ class ControlerBack extends Controler
             throw new NewException('Erreur : tous les champs ne sont pas remplis !');
         }
 
-
-		$new = $this->_objectPost->addPost($_POST['title'], $_POST['addPost']);
+        $dataDb = [
+        	'title' => $_POST['title'],
+        	'post' => $_POST['addPost']
+        ];
+		$new = $this->_objectPost->addPost($dataDb);
 		if (!$new) {
        	 	throw new NewException('Le billet n\'a pas été ajouté !');
     	}
@@ -135,6 +138,11 @@ class ControlerBack extends Controler
         }
 
 		$posts = $this->_objectPost->getPost($_GET['id']);
+
+		if ($posts->fetch() === false): throw new NewException("Erreur : Ce post n'existe pas !"); 
+    	else : $posts = $this->_objectPost->getPost($_GET['id']);
+    	endif;
+
 		$post = $posts->fetch();
 
 		$this->render('updatePostView', $post);
@@ -148,7 +156,12 @@ class ControlerBack extends Controler
             throw new NewException('Erreur : tous les champs ne sont pas remplis !');
         }
 
-		$update = $this->_objectPost->updatePost($_GET['id'], $_POST['title'], $_POST['addPost']);
+        $dataDb = [
+        	'postId' => $_GET['id'],
+        	'title' => $_POST['title'],
+        	'post' => $_POST['addPost']
+        ];
+		$update = $this->_objectPost->updatePost($dataDb);
 		if (!$update) {
        	 	throw new NewException('La modification n\'as pas eu lieu !');
     	}

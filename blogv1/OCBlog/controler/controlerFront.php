@@ -35,10 +35,15 @@ class ControlerFront extends Controler
         {
         	$report = null;
         }
-        
-    	$post = $this->_objectPost->getPost($_GET['id']);
-    	$comments = $this->_objectComment->getComments($_GET['id']);
 
+    	$post = $this->_objectPost->getPost($_GET['id']);
+
+    	if ($post->fetch() === false): throw new NewException("Erreur : Ce post n'existe pas !"); 
+    	else : $post = $this->_objectPost->getPost($_GET['id']);
+    	endif;
+
+    	$comments = $this->_objectComment->getComments($_GET['id']);
+    		
     	$data = [
     		'post' => $post,
     		'comments' => $comments,
@@ -91,12 +96,18 @@ class ControlerFront extends Controler
             throw new NewException('Erreur : tous les champs ne sont pas remplis !');
         }
 
-		$affectedLines = $this->_objectComment->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+        $dataDb = [
+        	'postId' => $_GET['id'],
+        	'author' => $_POST['author'],
+        	'comment' => $_POST['comment']
+        ];
+
+		$affectedLines = $this->_objectComment->addComment($dataDb);
     	if ($affectedLines === false) {
        	 	throw new NewException('Impossible d\'ajouter le commentaire !');
     	}
     	else {
-    	    header('Location: index.php?action=comments&id=' . $postId);
+    	    header('Location: index.php?action=getPost&id=' . $_GET['id']);
     	}
 	}
 

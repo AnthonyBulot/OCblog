@@ -40,18 +40,18 @@ class Posts extends DbConnect
 		return $delete;
 	}
 
-	public function addPost($title, $post) {
+	public function addPost($data) {
 		$req = $this->_db->prepare('INSERT INTO posts(title, content, datefr) VALUES( :title, :post , NOW())');
 		$new = $req->execute(array(
-			'title' => $title,
-			'post' => $post,
+			'title' => $data['title'],
+			'post' => $data['post'],
 			));
 		return $new;
 	} 
 
-	public function updatePost($postId, $title, $content) {
+	public function updatePost($data) {
 		$add = $this->_db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
-    	$add->execute(array($title, $content, $postId));
+    	$add->execute(array($data['title'], $data['post'], $data['postId']));
     	return $add;
 	}
 }
