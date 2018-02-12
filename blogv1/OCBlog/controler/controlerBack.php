@@ -10,7 +10,7 @@ class ControlerBack extends Controler
 	{
 		if (!(isset($_SESSION['password'])))
 		{
-			throw new NewException('Vous n\'avez pas accès à cette page');
+			throw new NewException('Vous n\'avez pas accès à cette page', 401);
 		}
 		$this->_objectPost = New Posts();
 		$this->_objectComment = New Comments();
@@ -35,7 +35,7 @@ class ControlerBack extends Controler
 
 	public function listReport(){
 		if (isset($_GET['id']) && !($_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$totalPosts = $this->_objectComment->numberComments();
@@ -69,12 +69,12 @@ class ControlerBack extends Controler
 
 	public function deleteComment(){
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$comment = $this->_objectComment->deleteComment($_GET['id']);
 		if (!$comment) {
-       	 	throw new NewException('Le commentaire n\'as pas été supprimer !');
+       	 	throw new NewException('Le commentaire n\'as pas été supprimer !', 409);
     	}
     	else {
     		header('Location: index.php?action=listReport&id=1&delete=1');
@@ -83,12 +83,12 @@ class ControlerBack extends Controler
 
 	public function deleteReport() {
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$report = $this->_objectReport->deleteReport($_GET['id']);
 		if (!$report) {
-       	 	throw new NewException('Les signalements n\'ont pas été supprimer !');
+       	 	throw new NewException('Les signalements n\'ont pas été supprimer !', 409);
     	}
     	else {
     		header('Location: index.php?action=listReport&id=1&delete=2');
@@ -97,12 +97,12 @@ class ControlerBack extends Controler
 
 	public function deletePost() {
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$delete = $this->_objectPost->deletePost($_GET['id']);
 		if (!$delete) {
-       	 	throw new NewException('Le billet n\'a pas été supprimé !');
+       	 	throw new NewException('Le billet n\'a pas été supprimé !', 409);
     	}
     	else {
 			header('Location: index.php');
@@ -115,7 +115,7 @@ class ControlerBack extends Controler
 
 	public function postWrite(){
 		if (empty($_POST['title']) && empty($_POST['addPost'])) {
-            throw new NewException('Erreur : tous les champs ne sont pas remplis !');
+            throw new NewException('Tous les champs ne sont pas remplis !', 400);
         }
 
         $dataDb = [
@@ -124,7 +124,7 @@ class ControlerBack extends Controler
         ];
 		$new = $this->_objectPost->addPost($dataDb);
 		if (!$new) {
-       	 	throw new NewException('Le billet n\'a pas été ajouté !');
+       	 	throw new NewException('Le billet n\'a pas été ajouté !', 409);
     	}
     	else {
     		header('Location: index.php');
@@ -133,12 +133,12 @@ class ControlerBack extends Controler
 
 	public function updatePost(){
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$posts = $this->_objectPost->getPost($_GET['id']);
 
-		if (!($posts->fetch())): throw new NewException("Erreur : Ce post n'existe pas !"); 
+		if (!($posts->fetch())): throw new NewException("Ce post n'existe pas !", 404); 
     	else : $posts = $this->_objectPost->getPost($_GET['id']);
     	endif;
 
@@ -149,10 +149,10 @@ class ControlerBack extends Controler
 
 	public function updatedPost(){
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 		if (empty($_POST['title']) && empty($_POST['addPost'])) {
-            throw new NewException('Erreur : tous les champs ne sont pas remplis !');
+            throw new NewException('Tous les champs ne sont pas remplis !', 400);
         }
 
         $dataDb = [
@@ -162,7 +162,7 @@ class ControlerBack extends Controler
         ];
 		$update = $this->_objectPost->updatePost($dataDb);
 		if (!$update) {
-       	 	throw new NewException('La modification n\'as pas eu lieu !');
+       	 	throw new NewException('La modification n\'as pas eu lieu !', 409);
     	}
     	else {
     	    header('Location: index.php?action=getPost&id=' . $_GET['id']);

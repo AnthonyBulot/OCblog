@@ -26,7 +26,7 @@ class ControlerFront extends Controler
 	public function getPost()
 	{
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de billet envoyé');
+            throw new NewException('Aucun identifiant de billet envoyé', 400);
         }
         if (isset($_GET['report'])){
         	$report = true;
@@ -38,7 +38,7 @@ class ControlerFront extends Controler
 
     	$post = $this->_objectPost->getPost($_GET['id']);
 
-    	if (!($post->fetch())): throw new NewException("Erreur : Ce post n'existe pas !"); 
+    	if (!($post->fetch())): throw new NewException("Ce post n'existe pas !", 404); 
     	else : $post = $this->_objectPost->getPost($_GET['id']);
     	endif;
 
@@ -54,7 +54,7 @@ class ControlerFront extends Controler
 
 	public function listPost() {
 		if (isset($_GET['id']) && !($_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$totalPosts = $this->_objectPost->numberPost();
@@ -90,10 +90,10 @@ class ControlerFront extends Controler
 	public function addComment()
 	{
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-			throw new NewException('Erreur : aucun identifiant de billet envoyé');
+			throw new NewException('Aucun identifiant de billet envoyé', 400);
 		}
         if (empty($_POST['author']) && empty($_POST['comment'])) {
-            throw new NewException('Erreur : tous les champs ne sont pas remplis !');
+            throw new NewException('Tous les champs ne sont pas remplis !', 400);
         }
 
         $dataDb = [
@@ -104,7 +104,7 @@ class ControlerFront extends Controler
 
 		$affectedLines = $this->_objectComment->addComment($dataDb);
     	if ($affectedLines === false) {
-       	 	throw new NewException('Impossible d\'ajouter le commentaire !');
+       	 	throw new NewException('Impossible d\'ajouter le commentaire !', 409);
     	}
     	else {
     	    header('Location: index.php?action=getPost&id=' . $_GET['id']);
@@ -117,10 +117,10 @@ class ControlerFront extends Controler
 
 	public function report(){
 		if (!(isset($_GET['postId']) && $_GET['postId'] > 0)) {
-			throw new NewException('Erreur : aucun identifiant de billet envoyé');
+			throw new NewException('Aucun identifiant de billet envoyé', 400);
         }
         if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
-            throw new NewException('Erreur : aucun identifiant de commentaire envoyé');
+            throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
 
 		$report = $this->_objectReport->addReport($_GET['id']);
@@ -134,18 +134,20 @@ class ControlerFront extends Controler
 
 	public function connect(){
 		if (empty($_POST['password'])) {
-            throw new NewException('Erreur : aucun mot de passe donné');
+            throw new NewException('Aucun mot de passe donné', 400);
         } 
 
         $objectAdministration = New Administration();
-
 		$dbPassword = $objectAdministration->getPassword();
-		if ($dbPassword['password'] == $_POST['password']) {
+
+		if (password_verify($_POST['password'], $dbPassword['password'])) {
 			$_SESSION['password'] = true;
-    	    header('Location: index.php?action=admin');
+    		header('Location: index.php?action=admin');
 		}
 		else{
-			throw new NewException('Mot de passe Incorect');
-		}
+			throw new NewException('Mot de passe Incorect', 400);
+		} 
+
+
 	}
 }

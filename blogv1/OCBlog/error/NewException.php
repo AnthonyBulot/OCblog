@@ -20,25 +20,22 @@ class NewException extends ErrorException
         break;
       
       default : // Erreur inconnue.
-        $type = 'Erreur inconnue';
+        $type = 'Erreur';
         break;
     }
     
-    return '<strong>' . $type . '</strong> : [' . $this->code . '] ' . $this->message . '<br /><strong>' . $this->file . '</strong> à la ligne <strong>' . $this->line . '</strong>';
+    return '<strong>' . $type . '</strong>[' . $this->code . '] : ' . $this->message . '<br />' /*. '<strong>' . $this->file . '</strong> à la ligne <strong>' . $this->line . '</strong>'*/;
   }
 }
 
 function error2exception($code, $message, $fichier, $ligne)
 {
-  // Le code fait office de sévérité.
-  // Reportez-vous aux constantes prédéfinies pour en savoir plus.
-  // http://fr2.php.net/manual/fr/errorfunc.constants.php
   throw new NewException($message, 0, $code, $fichier, $ligne);
 }
 
 function customException($e)
 {
-  echo 'Ligne ', $e->getLine(), ' dans ', $e->getFile(), '<br /><strong>Exception lancée</strong> : ', $e->getMessage();
+  echo 'Ligne ', $e->getLine(), ' dans ', $e->getFile(), '<br />Exception lancée : ', $e->getMessage();
 }
 
 set_error_handler('error2exception');

@@ -17,7 +17,7 @@ try {
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
         if (!(array_key_exists($action, $routeur))) {
-            throw new NewException("Erreur 404 : Cette page n'existe pas !");  
+            throw new NewException("Cette page n'existe pas !", 404);  
         }
         elseif ($routeur['' . $action . ''] == 'ControlerFront') {
             $controler = new ControlerFront();
@@ -34,5 +34,6 @@ try {
     }
 } 
 catch(NewException $e) {
-    require('view/errorView.php');
+    $view = 'errorView';
+    require('view/template.php');
 } 

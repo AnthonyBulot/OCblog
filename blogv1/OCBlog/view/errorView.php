@@ -1,5 +1,5 @@
 <!DOCTYPE html>
 
-    <?php 	echo '<p>' . $e . '</p>'; ?>
+<p class="intro"><?= $e ?></p>
     
 
