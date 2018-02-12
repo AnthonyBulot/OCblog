@@ -15,7 +15,9 @@ class Report extends DbConnect
 	}
 
 	public function listReport($first) {
-        $req = $this->_db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %H:%i:%s\') AS comment_datefr, report FROM comments ORDER BY report DESC LIMIT ' . $first . ' , 5');
+        $req = $this->_db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %H:%i:%s\') AS comment_datefr, report FROM comments ORDER BY report DESC LIMIT :first , 5');
+        $req->bindParam(':first', $first, PDO::PARAM_INT);
+        $req->execute();
         return $req;
 	}
 

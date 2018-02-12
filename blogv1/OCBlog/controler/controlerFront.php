@@ -38,7 +38,7 @@ class ControlerFront extends Controler
 
     	$post = $this->_objectPost->getPost($_GET['id']);
 
-    	if ($post->fetch() === false): throw new NewException("Erreur : Ce post n'existe pas !"); 
+    	if (!($post->fetch())): throw new NewException("Erreur : Ce post n'existe pas !"); 
     	else : $post = $this->_objectPost->getPost($_GET['id']);
     	endif;
 

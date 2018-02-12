@@ -21,7 +21,6 @@ class ControlerBack extends Controler
 		$numberPosts = $this->_objectPost->numberPost();
 		$post = $this->_objectPost->lastPost();
 
-
 		$data = [
 			'post' => $post,
 			'numberPosts' => $numberPosts
@@ -139,7 +138,7 @@ class ControlerBack extends Controler
 
 		$posts = $this->_objectPost->getPost($_GET['id']);
 
-		if ($posts->fetch() === false): throw new NewException("Erreur : Ce post n'existe pas !"); 
+		if (!($posts->fetch())): throw new NewException("Erreur : Ce post n'existe pas !"); 
     	else : $posts = $this->_objectPost->getPost($_GET['id']);
     	endif;
 
