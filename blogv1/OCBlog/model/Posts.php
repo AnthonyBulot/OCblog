@@ -1,7 +1,7 @@
 <?php
 
 
-class Posts extends DbConnect
+class Posts extends Database
 {
 	public function homePost()
 	{

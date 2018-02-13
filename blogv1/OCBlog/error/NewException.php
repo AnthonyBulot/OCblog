@@ -24,7 +24,7 @@ class NewException extends ErrorException
         break;
     }
     
-    return '<strong>' . $type . '</strong>[' . $this->code . '] : ' . $this->message . '<br />' /*. '<strong>' . $this->file . '</strong> à la ligne <strong>' . $this->line . '</strong>'*/;
+    return '<strong>' . $type . '</strong>[' . $this->code . '] : ' . $this->message . '<br />' . '<strong>' . $this->file . '</strong> à la ligne <strong>' . $this->line . '</strong>';
   }
 }
 

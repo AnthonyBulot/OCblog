@@ -1,7 +1,7 @@
 <?php
 
 
-class Comments extends DbConnect
+class Comments extends Database
 {
 	
 	public function getComments($postId)

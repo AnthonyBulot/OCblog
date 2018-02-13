@@ -1,6 +1,6 @@
 <?php 
 
-class Report extends DbConnect
+class Report extends Database
 {
 	public function addReport($commentId)
 	{
