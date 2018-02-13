@@ -9,5 +9,4 @@ class Administration extends Database{
     	$pass = $password->fetch();
     	return $pass;		
 	}
-
 }

@@ -136,11 +136,10 @@ class ControlerFront extends Controler
 		if (empty($_POST['password'])) {
             throw new NewException('Aucun mot de passe donné', 400);
         } 
-
         $objectAdministration = New Administration();
 		$dbPassword = $objectAdministration->getPassword();
-
-		if (password_verify($_POST['password'], $dbPassword['password'])) {
+        
+	    if (password_verify($_POST['password'], $dbPassword['password'])) {
 			$_SESSION['password'] = true;
     		header('Location: index.php?action=admin');
 		}
