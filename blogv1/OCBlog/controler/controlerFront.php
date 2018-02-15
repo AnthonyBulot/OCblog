@@ -138,7 +138,7 @@ class ControlerFront extends Controler
         } 
         $objectAdministration = New Administration();
 		$dbPassword = $objectAdministration->getPassword();
-        
+
 	    if (password_verify($_POST['password'], $dbPassword['password'])) {
 			$_SESSION['password'] = true;
     		header('Location: index.php?action=admin');
@@ -146,7 +146,25 @@ class ControlerFront extends Controler
 		else{
 			throw new NewException('Mot de passe Incorect', 400);
 		} 
-
-
 	}
+
+    public function search(){
+        if (empty($_POST['search'])) {
+            throw new NewException('Aucun champs renseigné', 400);
+        }
+
+        $search = '%' . $_POST['search'] . '%';
+
+        $data = $this->_objectPost->search($search);  
+
+        if (!($data->fetch()))
+        {
+            $this->render('falseSearchView', $_POST['search']);
+        }
+        else
+        {
+            $data = $this->_objectPost->search($search);
+            $this->render('searchView', $data);
+        }
+    }
 }

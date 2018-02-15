@@ -56,4 +56,14 @@ class Posts extends Database
     	$add->execute(array($data['title'], $data['post'], $data['postId']));
     	return $add;
 	}
+
+	public function search($search) {
+		$req = $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(datefr, \'%d/%m/%Y à %H:%i:%s\') AS date_fr FROM posts 
+								  WHERE title LIKE :title OR content LIKE :content ORDER BY datefr DESC');
+		$req->execute(array(
+			'title' => $search,
+			'content' => $search,
+		));
+		return $req;
+	}
 }

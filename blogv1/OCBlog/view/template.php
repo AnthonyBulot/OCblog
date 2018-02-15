@@ -3,12 +3,18 @@
     <head>
         <meta charset="utf-8" />
         <title>Blog</title>
-        <link href="css/style.css" rel="stylesheet" /> 
+        <link href="css/styles.css" rel="stylesheet" /> 
     </head>
         
     <body>
         <header>
             <p class="textMenu">Blog de Jean Forteroche</p>
+            <div class="search">
+                <form method="post" action="index.php?action=search">
+                    <input class="searchText" type="search" name="search">
+                    <input class="searchSubmit" type="submit" name="submit" value="Recherchez"> 
+                </form>
+            </div>
             <div id="menu">
                 <p><img src="css/image/logo_livre.png" alt="Logo livre"></p>
                 <a href="index.php" class="lienMenu">Accueil</a>
@@ -27,6 +33,12 @@
             <?php require('view/' . $view . '.php'); ?>
         </section> 
         <footer>
+            <div class="search">
+                <form method="post" action="index.php?action=search">
+                    <input class="searchText" type="search" name="search">
+                    <input class="searchSubmit" type="submit" name="submit" value="Recherchez"> 
+                </form>
+            </div>
             <p>Ce blog a été fait dans le cadre de la formation Développeur Web Junior de OpenClassrooms</p>
         </footer>
 

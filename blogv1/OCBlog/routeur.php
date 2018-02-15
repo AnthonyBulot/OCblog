@@ -16,5 +16,6 @@ $routeur = [
 	"addPost" => "ControlerBack",
 	"postWrite" => "ControlerBack",
 	"updatePost" => "ControlerBack",
-	"updatedPost" => "ControlerBack"
+	"updatedPost" => "ControlerBack",
+	"search" => "ControlerFront"
 ];

@@ -3,20 +3,21 @@
 class DbConnect
 {
 	private $settings = [];
-	private static $_db;
+	public $db;
+	private static $_instance;
 
 	public static function getInstance(){
 
-		if (is_null((self::$_db))){
+		if (is_null((self::$_instance))){
 
-			$object = new DbConnect();
-			self::$_db = $object->getDb();
+			self::$_instance = new DbConnect();
 		}
-		return self::$_db;
+		return self::$_instance;
 	}
 
 	private function __construct(){
 		$this->settings = require 'config/config.php';
+		$this->db = $this->getDb();
 	}
 
 	public function get($key) {

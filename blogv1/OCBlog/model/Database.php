@@ -5,6 +5,7 @@ class Database {
 	protected $_db;
 
 	public function __construct() {
-		$this->_db = DbConnect::getInstance();
+		$instance = DbConnect::getInstance();
+		$this->_db = $instance->db;
 	}
 }
