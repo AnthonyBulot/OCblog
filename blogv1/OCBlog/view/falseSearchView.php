@@ -1,5 +1,4 @@
 <?php ?>
+<?php $template = 'template'; ?>
 
-<!DOCTYPE html> 
-
-<p class="intro">Désolé aucun résultat trouvé pour '<?= $dataView ?>'</p>
+<p class="intro">Désolé aucun résultat trouvé pour '<?= $search ?>'</p>

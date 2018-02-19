@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+//explode
 try {
     require('routeur.php');
     require('error/NewException.php');
@@ -19,12 +19,8 @@ try {
         if (!(array_key_exists($action, $routeur))) {
             throw new NewException("Cette page n'existe pas !", 404);  
         }
-        elseif ($routeur['' . $action . ''] == 'ControlerFront') {
-            $controler = new ControlerFront();
-            $controler->$action();
-        }
-        elseif ($routeur['' . $action . ''] == 'ControlerBack') {
-            $controler = new ControlerBack();
+        else  {
+            $controler = new $routeur['' . $action . '']();
             $controler->$action();
         }
     }
@@ -34,6 +30,8 @@ try {
     }
 } 
 catch(NewException $e) {
-    $view = 'errorView';
+    ob_start();
+        require('view/errorView.php');
+    $content = ob_get_clean();
     require('view/template.php');
 } 

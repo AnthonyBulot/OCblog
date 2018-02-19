@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<?php $template = 'template'; ?>
 
 <h1 class="titre">Billet simple pour l'Alaska</h1>
 <p class="intro">Voici toutes les histoires déjà publiées de mon livres dans l'ordre décroissant :</p>
 
 <div class="allNews">
 <?php
-while ($data = $dataView['posts']->fetch())
+while ($data = $posts->fetch())
 {
 ?>
     <div class="news">
@@ -17,14 +17,14 @@ while ($data = $dataView['posts']->fetch())
         <p class="textNews">
             <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
             <br />
-            <p class="pSuite"><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienSuite">Lire la suite</a></p>
+            <p class="pSuite"><a href="/OCBlog/blog/getPost/post-<?= $data['id'] ?>" class="lienSuite">Lire la suite</a></p>
             <br/>
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienNews">Commentaires</a></em>
+            <em><a href="/OCBlog/blog/getPost/post-<?= $data['id'] ?>" class="lienNews">Commentaires</a></em>
             <br/> 
             <?php if (isset($_SESSION['password'])){
             ?>
-                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=updatePost" class="lienNews">Modifier</a></em>
-                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
+                <em><a href="/OCBlog/blog/updatePost/post-<?= $data['id'] ?>" class="lienNews">Modifier</a></em>
+                <em><a href="/OCBlog/blog/deletePost/post-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
             <?php
             }
             ?>
@@ -35,16 +35,16 @@ while ($data = $dataView['posts']->fetch())
 </div>
 <?php
 echo '<p class="numberPages">Page : '; //Pour l'affichage, on centre la liste des pages
-for($i=1; $i<=$dataView['numberPages']; $i++) //On fait notre boucle
+for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
 {
      //On va faire notre condition
-     if($i==$dataView['currentPage']) //Si il s'agit de la page actuelle...
+     if($i==$currentPage) //Si il s'agit de la page actuelle...
      {
          echo ' [ '.$i.' ] '; 
      }	
      else //Sinon...
      {
-          echo ' <a class="lienPage" href="index?action=listPost&amp;id='.$i.'">'.$i.'</a> ';
+          echo ' <a class="lienPage" href="/OCBlog/blog/listPost/post-'.$i.'">'.$i.'</a> ';
      }
 }
 

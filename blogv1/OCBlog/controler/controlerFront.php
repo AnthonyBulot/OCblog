@@ -11,7 +11,7 @@ class ControlerFront extends Controler
 	{
 		$this->_objectPost = New Posts();
 		$this->_objectComment = New Comments();
-		$this->_objectReport = New Report();
+		$this->_objectReport = New Report(); 
 	}
 
 	public function homePosts()
@@ -28,6 +28,7 @@ class ControlerFront extends Controler
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Aucun identifiant de billet envoyé', 400);
         }
+        
         if (isset($_GET['report'])){
         	$report = true;
         }
@@ -83,7 +84,7 @@ class ControlerFront extends Controler
     		'numberPages' => $numberPages,
     		'currentPage' => $currentPage
     	];
-		$this->render('listPostView', $data);
+		$this->render('listPostView', $data); 
 	}
 
 
@@ -107,12 +108,12 @@ class ControlerFront extends Controler
        	 	throw new NewException('Impossible d\'ajouter le commentaire !', 409);
     	}
     	else {
-    	    header('Location: index.php?action=getPost&id=' . $_GET['id']);
+    	    header('Location: /OCBlog/blog/getPost/post-' . $_GET['id']);
     	}
 	}
 
 	public function formConnect() {
-		$this->render('connectView', null);
+		$this->render('connectView');
 	}
 
 	public function report(){
@@ -128,7 +129,7 @@ class ControlerFront extends Controler
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
-    		header('Location: index.php?action=getPost&id=' . $_GET['postId'] . '&report=true');
+    		header('Location: /OCBlog/blog/getPost/post-' . $_GET['postId'] . '/report');
     	}
 	}
 
@@ -141,7 +142,7 @@ class ControlerFront extends Controler
 
 	    if (password_verify($_POST['password'], $dbPassword['password'])) {
 			$_SESSION['password'] = true;
-    		header('Location: index.php?action=admin');
+    		header('Location: /OCBlog/blog/admin');
 		}
 		else{
 			throw new NewException('Mot de passe Incorect', 400);
@@ -159,12 +160,18 @@ class ControlerFront extends Controler
 
         if (!($data->fetch()))
         {
-            $this->render('falseSearchView', $_POST['search']);
+            $data = [
+                'search' => $_POST['search'],
+            ];
+            $this->render('falseSearchView', $data);
         }
         else
         {
             $data = $this->_objectPost->search($search);
-            $this->render('searchView', $data);
+            $dataDb = [
+                'search' => $data,
+            ];
+            $this->render('searchView', $dataDb);
         }
     }
 }

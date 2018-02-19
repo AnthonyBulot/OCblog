@@ -1,32 +1,31 @@
-<!DOCTYPE html>
-<?php $data = $dataView['post'] ?>
+<?php $template = 'template'?>
 
 <h1 class="titre">Bonjour Jean Forteroche</h1>
-<p class="adminNumber">Vous avez publié <em class="report"><?= $dataView['numberPosts'] ?></em> posts depuis le début ! </p>
+<p class="adminNumber">Vous avez publié <em class="report"><?= $numberPosts ?></em> posts depuis le début ! </p>
 <div class="admin">
-	<p class="lienAdminReport"><a href="index.php?action=listReport" class="lienAdminis">Les Billets les plus Signaler</a></p>
-	<p class="lienAdminAdd"><a href="index.php?action=addPost" class="lienAdminis">Ajouté un billet</a></p>
+	<p class="lienAdminReport"><a href="/OCBlog/blog/listReport" class="lienAdminis">Les Billets les plus Signaler</a></p>
+	<p class="lienAdminAdd"><a href="/OCBlog/blog/addPost" class="lienAdminis">Ajouté un billet</a></p>
 </div>
 
 
 <p class="adminNumber">Voici votre dernier post :</p>
 <div class="news">
         <h3 class="titreNews">
-            <?= htmlspecialchars($data['title']) ?>
-            <em class="dateNews">le <?= $data['date_fr'] ?></em>
+            <?= htmlspecialchars($post['title']) ?>
+            <em class="dateNews">le <?= $post['date_fr'] ?></em>
         </h3>
         
         <p class="textNews">
-            <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
+            <?php echo '<div class="textContent">' . nl2br(substr($post['content'],0,100)) . '...</div>'; ?>
             <br />
-            <p class="pSuite"><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienSuite">Lire la suite</a></p>
+            <p class="pSuite"><a href="/OCBlog/blog/getPost/post-<?= $post['id'] ?>" class="lienSuite">Lire la suite</a></p>
             <br/>
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienNews">Commentaires</a></em>
+            <em><a href="/OCBlog/blog/getPost/post-<?= $post['id'] ?>" class="lienNews">Commentaires</a></em>
             <br/> 
             <?php if (isset($_SESSION['password'])){
             ?>
-                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=updatePost" class="lienNews">Modifier</a></em>
-                <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
+                <em><a href="/OCBlog/blog/updatePost/post-<?= $post['id'] ?>" class="lienNews">Modifier</a></em>
+                <em><a href="/OCBlog/blog/deletePost/post-<?= $post['id'] ?>" class="lienNews">Supprimer</a></em>
             <?php
             }
             ?>

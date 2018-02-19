@@ -30,7 +30,7 @@ class ControlerBack extends Controler
 
 	public function deconnect(){
 		session_destroy();
-		header('Location: index.php');
+		header('Location: /OCBlog/blog');
 	}
 
 	public function listReport(){
@@ -77,7 +77,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !', 409);
     	}
     	else {
-    		header('Location: index.php?action=listReport&id=1&delete=1');
+    		header('Location: /OCBlog/blog/listReport/delete-1');
     	}
 	}
 
@@ -91,7 +91,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !', 409);
     	}
     	else {
-    		header('Location: index.php?action=listReport&id=1&delete=2');
+    		header('Location: /OCBlog/blog/listReport/delete-2');
     	}
 	}
 
@@ -105,12 +105,12 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le billet n\'a pas été supprimé !', 409);
     	}
     	else {
-			header('Location: index.php');
+			header('Location: /OCBlog/blog');
     	}
 	}
 
 	public function addPost(){
-		$this->render('addPostView', null);
+		$this->render('addPostView');
 	}
 
 	public function postWrite(){
@@ -127,7 +127,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le billet n\'a pas été ajouté !', 409);
     	}
     	else {
-    		header('Location: index.php');
+    		header('Location: /OCBlog/blog');
     	}
 	}
 
@@ -143,8 +143,10 @@ class ControlerBack extends Controler
     	endif;
 
 		$post = $posts->fetch();
-
-		$this->render('updatePostView', $post);
+		$data = [
+    		'post' => $post
+    	];
+		$this->render('updatePostView', $data);
 	}
 
 	public function updatedPost(){
@@ -165,7 +167,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('La modification n\'as pas eu lieu !', 409);
     	}
     	else {
-    	    header('Location: index.php?action=getPost&id=' . $_GET['id']);
+    	    header('Location: /OCBlog/blog/getPost/post-' . $_GET['id']);
     	}		
 	}
 }

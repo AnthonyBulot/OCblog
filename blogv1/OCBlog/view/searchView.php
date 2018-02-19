@@ -1,12 +1,12 @@
 <?php ?>
 
-<!DOCTYPE html>
+<?php $template = 'template'; ?>
 
 <p class="intro">Voici les résultats :</p>
 
 <div class="allNews">
 <?php
-while ($data = $dataView->fetch())
+while ($data = $search->fetch())
 {
 ?>
     <div class="news">
@@ -17,14 +17,14 @@ while ($data = $dataView->fetch())
         
         <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
         <br />
-        <p class="pSuite"><a class="lienSuite" href="index.php?id=<?= $data['id'] ?>&amp;action=getPost">Lire la suite</a></p>
+        <p class="pSuite"><a class="lienSuite" href="/OCBlog/blog/getPost/post-<?= $data['id'] ?>">Lire la suite</a></p>
         <br />
-        <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=getPost" class="lienNews">Commentaires</a></em>
+        <em><a href="/OCBlog/blog/getPost/post-<?= $data['id'] ?>" class="lienNews">Commentaires</a></em>
         <br/> 
         <?php if (isset($_SESSION['password'])){
         ?>
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=updatePost" class="lienNews">Modifier</a></em>
-            <em><a href="index.php?id=<?= $data['id'] ?>&amp;action=deletePost" class="lienNews">Supprimer</a></em>
+            <em><a href="/OCBlog/blog/updatePost/post-<?= $data['id'] ?>" class="lienNews">Modifier</a></em>
+            <em><a href="/OCBlog/blog/deletePost/post-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
         <?php
         }
         ?>
