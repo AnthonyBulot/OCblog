@@ -5,7 +5,7 @@ try {
     require('routeur.php');
     require('error/NewException.php');
     function autoloader($class){
-        if ($class === "ControlerFront" || $class === "ControlerBack" || $class === 'Controler'){
+        if (preg_match ('#^Controler#' , $class)){
             require 'controler/' . $class . '.php';
         }
         else {
@@ -20,8 +20,9 @@ try {
             throw new NewException("Cette page n'existe pas !", 404);  
         }
         else  {
-            $controler = new $routeur['' . $action . '']();
-            $controler->$action();
+            $rout = explode('@', $routeur['' . $action . '']);
+            $controler = new $rout[0]();
+            $controler->$rout[1]();
         }
     }
     else {
