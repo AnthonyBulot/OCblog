@@ -2,18 +2,17 @@
 
 class ControlerFront extends Controler
 {
-	protected $_objectPost;
-	protected $_objectComment;
-	protected $_objectReport;
+    protected $_objectPost;
+    protected $_objectComment;
+    protected $_objectReport;
 
 
-	public function __construct()
-	{
-		$this->_objectPost = New Posts();
-		$this->_objectComment = New Comments();
-		$this->_objectReport = New Report(); 
-	}
-
+    public function __construct()
+    {
+        $this->_objectPost = New Posts();
+        $this->_objectComment = New Comments();
+        $this->_objectReport = New Report(); 
+    }
 	public function homePosts()
 	{
     	$posts = $this->_objectPost->homePost();
@@ -108,7 +107,7 @@ class ControlerFront extends Controler
        	 	throw new NewException('Impossible d\'ajouter le commentaire !', 409);
     	}
     	else {
-    	    header('Location: /OCBlog/blog/article-' . $_GET['id']);
+    	    header('Location: /blog/article-' . $_GET['id']);
     	}
 	}
 
@@ -129,7 +128,7 @@ class ControlerFront extends Controler
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
-    		header('Location: /OCBlog/blog/article-' . $_GET['postId'] . '/report');
+    		header('Location: /blog/article-' . $_GET['postId'] . '/report');
     	}
 	}
 
@@ -142,7 +141,7 @@ class ControlerFront extends Controler
 
 	    if (password_verify($_POST['password'], $dbPassword['password'])) {
 			$_SESSION['password'] = true;
-    		header('Location: /OCBlog/blog/administration');
+    		header('Location: /blog/administration');
 		}
 		else{
 			throw new NewException('Mot de passe Incorect', 400);

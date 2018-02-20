@@ -1,8 +1,7 @@
 <?php
 
 class Controler 
-{
-	
+{	
 	public function render($view, $dataView = [])
 	{
 

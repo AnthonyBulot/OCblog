@@ -18,7 +18,8 @@ try {
         if (preg_match($key, $_SERVER['REQUEST_URI'])){
             $rout = explode('@', $value);
             $controler = new $rout[0]();
-            $controler->$rout[1]();
+            $method = $rout[1];
+            $controler->$method();
         }
     }
     if(!(isset($controler))){

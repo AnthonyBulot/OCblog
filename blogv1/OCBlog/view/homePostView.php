@@ -16,14 +16,14 @@ while ($data = $posts->fetch())
         
         <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
         <br />
-        <p class="pSuite"><a class="lienSuite" href="/OCBlog/blog/article-<?= $data['id'] ?>">Lire la suite</a></p>
+        <p class="pSuite"><a class="lienSuite" href="/blog/article-<?= $data['id'] ?>">Lire la suite</a></p>
         <br />
-        <em><a href="/OCBlog/blog/article-<?= $data['id'] ?>" class="lienNews">Commentaires</a></em>
+        <em><a href="/blog/article-<?= $data['id'] ?>" class="lienNews">Commentaires</a></em>
         <br/> 
         <?php if (isset($_SESSION['password'])){
         ?>
-            <em><a href="/OCBlog/blog/modification/article-<?= $data['id'] ?>" class="lienNews">Modifier</a></em>
-            <em><a href="/OCBlog/blog/suprimer/article-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
+            <em><a href="/blog/modification/article-<?= $data['id'] ?>" class="lienNews">Modifier</a></em>
+            <em><a href="/blog/suprimer/article-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
         <?php
         }
         ?>

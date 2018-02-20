@@ -2,9 +2,9 @@
 
 class ControlerBack extends Controler
 {
-	protected $_objectPost;
-	protected $_objectComment;
-	protected $_objectReport;
+    protected $_objectPost;
+    protected $_objectComment;
+    protected $_objectReport;
 
 	public function __construct()
 	{
@@ -13,8 +13,8 @@ class ControlerBack extends Controler
 			throw new NewException('Vous n\'avez pas accès à cette page', 401);
 		}
 		$this->_objectPost = New Posts();
-		$this->_objectComment = New Comments();
-		$this->_objectReport = New Report();
+        $this->_objectComment = New Comments();
+        $this->_objectReport = New Report(); 
 	}
 
 	public function admin(){
@@ -30,7 +30,7 @@ class ControlerBack extends Controler
 
 	public function deconnect(){
 		session_destroy();
-		header('Location: /OCBlog/blog');
+		header('Location: /blog');
 	}
 
 	public function listReport(){
@@ -77,7 +77,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !', 409);
     	}
     	else {
-    		header('Location: /OCBlog/blog/liste-signalement/delete-1');
+    		header('Location: /blog/liste-signalement/delete-1');
     	}
 	}
 
@@ -91,7 +91,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !', 409);
     	}
     	else {
-    		header('Location: /OCBlog/blog/liste-signalement/delete-2');
+    		header('Location: /blog/liste-signalement/delete-2');
     	}
 	}
 
@@ -105,7 +105,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le billet n\'a pas été supprimé !', 409);
     	}
     	else {
-			header('Location: /OCBlog/blog');
+			header('Location: /blog');
     	}
 	}
 
@@ -127,7 +127,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le billet n\'a pas été ajouté !', 409);
     	}
     	else {
-    		header('Location: /OCBlog/blog');
+    		header('Location: /blog');
     	}
 	}
 
@@ -167,7 +167,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('La modification n\'as pas eu lieu !', 409);
     	}
     	else {
-    	    header('Location: /OCBlog/blog/article-' . $_GET['id']);
+    	    header('Location:  /blog/article-' . $_GET['id']);
     	}		
 	}
 }

@@ -1,6 +1,6 @@
 <?php $template = 'template'; ?>
 
-    <form method="post" action="/OCBlog/blog/connexion" class="form">
+    <form method="post" action="/blog/connexion" class="form">
         <div>
             <label>Mot De Passe</label>
             <input type="password" name=password />
