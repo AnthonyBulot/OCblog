@@ -17,14 +17,14 @@ while ($data = $posts->fetch())
         <p class="textNews">
             <?php echo '<div class="textContent">' . nl2br(substr($data['content'],0,100)) . '...</div>'; ?>
             <br />
-            <p class="pSuite"><a href="/OCBlog/blog/getPost/post-<?= $data['id'] ?>" class="lienSuite">Lire la suite</a></p>
+            <p class="pSuite"><a href="/OCBlog/blog/article-<?= $data['id'] ?>" class="lienSuite">Lire la suite</a></p>
             <br/>
-            <em><a href="/OCBlog/blog/getPost/post-<?= $data['id'] ?>" class="lienNews">Commentaires</a></em>
+            <em><a href="/OCBlog/blog/article-<?= $data['id'] ?>" class="lienNews">Commentaires</a></em>
             <br/> 
             <?php if (isset($_SESSION['password'])){
             ?>
-                <em><a href="/OCBlog/blog/updatePost/post-<?= $data['id'] ?>" class="lienNews">Modifier</a></em>
-                <em><a href="/OCBlog/blog/deletePost/post-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
+                <em><a href="/OCBlog/blog/modification/article-<?= $data['id'] ?>" class="lienNews">Modifier</a></em>
+                <em><a href="/OCBlog/blog/suprimer/article-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
             <?php
             }
             ?>
@@ -44,7 +44,7 @@ for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
      }	
      else //Sinon...
      {
-          echo ' <a class="lienPage" href="/OCBlog/blog/listPost/post-'.$i.'">'.$i.'</a> ';
+          echo ' <a class="lienPage" href="/OCBlog/blog/liste-article/page-'.$i.'">'.$i.'</a> ';
      }
 }
 

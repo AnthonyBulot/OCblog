@@ -10,7 +10,7 @@
         <header>
             <p class="textMenu">Blog de Jean Forteroche</p>
             <div class="search">
-                <form method="post" action="/OCBlog/blog/search">
+                <form method="post" action="/OCBlog/blog/recherche">
                     <input class="searchText" type="search" name="search">
                     <input class="searchSubmit" type="submit" name="submit" value="Recherchez"> 
                 </form>
@@ -18,12 +18,12 @@
             <div id="menu">
                 <p><img src="/OCBlog/css/image/logo_livre.png" alt="Logo livre"></p>
                 <a href="/OCBlog/blog" class="lienMenu">Accueil</a>
-                <a href="/OCBlog/blog/listPost" class="lienMenu">Chapitres</a>                
+                <a href="/OCBlog/blog/liste-article" class="lienMenu">Chapitres</a>                
                 <?php if (isset($_SESSION['password'])): ?>                
-                <a href="/OCBlog/blog/admin" class="lienMenu">Administration</a>
+                <a href="/OCBlog/blog/administration" class="lienMenu">Administration</a>
                 <a href="/OCBlog/blog/deconnect" class="lienMenu">Déconnexion</a>
                 <?php else: ?>              
-                <a href="/OCBlog/blog/formConnect" class="lienMenu">Indentifiez-vous</a>
+                <a href="/OCBlog/blog/formulaire-connexion" class="lienMenu">Indentifiez-vous</a>
                 <?php                                   
                 endif;
                 ?>

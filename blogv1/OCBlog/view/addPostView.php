@@ -7,7 +7,7 @@
 <p class="intro">Ajouté un chapitre :</p>
 
 
-<form method="post" action="/OCBlog/blog/postWrite">
+<form method="post" action="/OCBlog/blog/article-ecrit">
     <input type="text" name="title" value="Votre Titre..." class="texteAddPost" />
     <textarea name="addPost">
         <p>Votre Texte...</p>

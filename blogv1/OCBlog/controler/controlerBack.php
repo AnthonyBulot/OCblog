@@ -77,7 +77,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Le commentaire n\'as pas été supprimer !', 409);
     	}
     	else {
-    		header('Location: /OCBlog/blog/listReport/delete-1');
+    		header('Location: /OCBlog/blog/liste-signalement/delete-1');
     	}
 	}
 
@@ -91,7 +91,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('Les signalements n\'ont pas été supprimer !', 409);
     	}
     	else {
-    		header('Location: /OCBlog/blog/listReport/delete-2');
+    		header('Location: /OCBlog/blog/liste-signalement/delete-2');
     	}
 	}
 
@@ -167,7 +167,7 @@ class ControlerBack extends Controler
        	 	throw new NewException('La modification n\'as pas eu lieu !', 409);
     	}
     	else {
-    	    header('Location: /OCBlog/blog/getPost/post-' . $_GET['id']);
+    	    header('Location: /OCBlog/blog/article-' . $_GET['id']);
     	}		
 	}
 }

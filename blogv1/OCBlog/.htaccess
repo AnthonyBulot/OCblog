@@ -1,8 +1,8 @@
 RewriteEngine On
-RewriteRule  blog$                                                  index.php
-RewriteRule  blog/([a-zA-Z0-9]+)/post-([0-9]+)$                     index.php?action=$1&id=$2
-RewriteRule  blog/([a-zA-Z0-9]+)/post-([0-9]+)/report$              index.php?action=$1&id=$2&report=true
-RewriteRule  blog/([a-zA-Z0-9]+)/comment-([0-9]+)$                  index.php?action=$1&id=$2
-RewriteRule  blog/([a-zA-Z0-9]+)/delete-([0-9]+)$                   index.php?action=$1&delete=$2
-RewriteRule  blog/([a-zA-Z0-9]+)/post-([0-9]+)/comment-([0-9]+)$    index.php?action=$1&postId=$2&id=$3
-RewriteRule  blog/([a-zA-Z0-9]+)$                                   index.php?action=$1                    [L]
+RewriteRule  ([a-zA-Z0-9\-]+)$                                               index.php
+RewriteRule  blog/([a-zA-Z0-9\-]+)/delete-([0-9]+)$                          index.php?delete=$2
+RewriteRule  blog/([a-zA-Z0-9\-]+)/([a-zA-Z0-9\-]+)-([0-9]+)$                index.php?id=$3
+RewriteRule  blog/([a-zA-Z0-9\-]+)-([0-9]+)$                                 index.php?id=$2
+RewriteRule  blog/article-([0-9]+)/report$                                   index.php?id=$1&report=true
+RewriteRule  blog/([a-zA-Z0-9\-]+)/article-([0-9]+)/commentaire-([0-9]+)$    index.php?postId=$2&id=$3
+RewriteRule  blog/([a-zA-Z0-9\-]+)$                                          index.php                  [L]

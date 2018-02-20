@@ -13,8 +13,8 @@
             <br />
             <?php if (isset($_SESSION['password'])){
             ?>
-                <a href="/OCBlog/blog/updatePost/post-<?= $data['id'] ?>" class="lienNews">Modifier</a>
-                <em><a href="/OCBlog/blog/deletePost/post-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
+                <a href="/OCBlog/blog/modification/article-<?= $data['id'] ?>" class="lienNews">Modifier</a>
+                <em><a href="/OCBlog/blog/suprimer/article-<?= $data['id'] ?>" class="lienNews">Supprimer</a></em>
             <?php
             }
             ?>
@@ -32,13 +32,13 @@
             <div class="comment">            
                 <p class="textComment"><strong class="author"><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_datefr'] ?></p>
                 <p class="textComment"><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-                <p><a class="lienComment" href="/OCBlog/blog/report/post-<?= $data['id'] ?>/comment-<?= $comment['id'] ?>">Signaler</a></p>
+                <p><a class="lienComment" href="/OCBlog/blog/signalement/article-<?= $data['id'] ?>/commentaire-<?= $comment['id'] ?>">Signaler</a></p>
             </div>
 
         <?php
         }
 ?>
-        <form class="formComment" method="post" action="/OCBlog/blog/addComment/post-<?= $data['id'] ?>">
+        <form class="formComment" method="post" action="/OCBlog/blog/ajout-commentaire/article-<?= $data['id'] ?>">
             <p class="formCommentText">Ajouté un commentaire</p>
             <label for="Nom_commentaire">Nom</label><input type="text" name="author" id="Nom_commentaire" />
             <label for="comment">Commentaire</label><textarea rows="10" name="comment" id="comment"></textarea>

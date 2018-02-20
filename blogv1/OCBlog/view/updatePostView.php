@@ -7,7 +7,7 @@
 <p class="intro">Modifié un chapitre :</p>
 
 
-<form method="post" action="/OCBlog/blog/updatedPost/post-<?= $post['id'] ?>">
+<form method="post" action="/OCBlog/blog/modification-article/article-<?= $post['id'] ?>">
     <input type="text" name="title" value="<?= $post['title'] ?>" class="texteAddPost" />
     <textarea name="addPost">
         <?= $post['content'] ?>
