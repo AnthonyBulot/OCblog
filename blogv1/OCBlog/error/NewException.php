@@ -1,4 +1,5 @@
 <?php
+
 class NewException extends ErrorException
 {
   public function __toString()
@@ -24,7 +25,7 @@ class NewException extends ErrorException
         break;
     }
     
-    return '<strong>' . $type . '</strong>[' . $this->code . '] : ' . $this->message . '<br />' . '<strong>' . $this->file . '</strong> à la ligne <strong>' . $this->line . '</strong>' ;
+    return '<strong>' . $type . '</strong>[' . $this->code . '] : ' . $this->message /*. '<br />' . '<strong>' . $this->file . '</strong> à la ligne <strong>' . $this->line . '</strong>'*/ ;
   }
 }
 
@@ -35,7 +36,7 @@ function error2exception($code, $message, $fichier, $ligne)
 
 function customException($e)
 {
-  echo 'Ligne ', $e->getLine(), ' dans ', $e->getFile(), '<br />Exception lancée : ', $e->getMessage();
+  echo 'Ligne ', $e->getLine(), ' dans ', $e->getFile(), '<br />' . 'Exception lancée : ', $e->getMessage();
 }
 
 set_error_handler('error2exception');

@@ -1,4 +1,5 @@
 <?php
+namespace Blog\model;
 
 
 class Posts extends Database
@@ -26,7 +27,7 @@ class Posts extends Database
 
 	public function listPosts($first){
 		$posts= $this->_db->prepare('SELECT id, title, content, DATE_FORMAT(datefr, \'%d/%m/%Y à %H:%i:%s\') AS date_fr FROM posts ORDER BY datefr DESC LIMIT :first, 5');
-		$posts->bindParam(':first', $first, PDO::PARAM_INT);
+		$posts->bindParam(':first', $first, \PDO::PARAM_INT);
         $posts->execute();
 		return $posts;
 	}

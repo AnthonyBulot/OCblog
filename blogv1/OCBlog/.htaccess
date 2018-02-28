@@ -3,10 +3,12 @@ RewriteRule  blog/([a-zA-Z0-9\-\/_\.]+)css/([a-zA-Z0-9\-\/_\.]+)             css
 RewriteRule  blog/css/([a-zA-Z0-9\-\/_\.]+)                                  css/$1
 RewriteRule  blog/([a-zA-Z0-9\-\/_\.]+)js/([a-zA-Z0-9\-\/_\.]+)              js/$2
 RewriteRule  blog/js/([a-zA-Z0-9\-\/_\.]+)                                   js/$1
+RewriteRule  blog/article-([0-9]+)/signalement$                              index.php?postId=$1&signalement=report
+RewriteRule  blog/article-([0-9]+)$                                          index.php?postId=$1
+RewriteRule  blog/article-([0-9]+)/commentaire-([0-9]+)$                     index.php?postId=$1&id=$2
 RewriteRule  blog/([a-zA-Z0-9\-]+)-([0-9]+)$                                 index.php?id=$2
 RewriteRule  blog/([a-zA-Z0-9\-]+)/delete-([0-9]+)$                          index.php?delete=$2
 RewriteRule  blog/([a-zA-Z0-9\-]+)/([a-zA-Z0-9\-]+)-([0-9]+)$                index.php?id=$3
-RewriteRule  blog/article-([0-9]+)/report$                                   index.php?id=$1&report=true
 RewriteRule  blog/([a-zA-Z0-9\-]+)/article-([0-9]+)/commentaire-([0-9]+)$    index.php?postId=$2&id=$3
 RewriteRule  blog/([a-zA-Z0-9\-]+)$                                          index.php
 RewriteRule  blog$                                                           index.php [L]

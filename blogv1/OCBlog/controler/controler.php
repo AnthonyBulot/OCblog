@@ -1,4 +1,6 @@
 <?php
+namespace Blog\controler;
+
 
 class Controler 
 {	

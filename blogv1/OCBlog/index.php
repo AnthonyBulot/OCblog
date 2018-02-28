@@ -2,22 +2,17 @@
 session_start();
 
 try {
-    require('routeur.php');
     require('error/NewException.php');
-    function autoloader($class){
-        if (preg_match('#^Controler#' , $class)){
-            require 'controler/' . $class . '.php';
-        }
-        else {
-            require 'model/' . $class . '.php';
-        }
-    }
-    spl_autoload_register('autoloader');
+    require('routeur.php');
+    require('autoloader/Autoloader.php');
+    \Blog\Autoloader::register();
 
     foreach ($routeur as $key => $value) {
         if (preg_match($key, $_SERVER['REQUEST_URI'])){
+            $model = require('model/model.php');
             $rout = explode('@', $value);
-            $controler = new $rout[0]();
+            $class = '\Blog\controler\\' . $rout[0];
+            $controler = new $class($model);
             $method = $rout[1];
             $controler->$method();
         }
@@ -25,7 +20,6 @@ try {
     if(!(isset($controler))){
       throw new NewException("Cette page n'existe pas !", 404);   
     }
-
 } 
 catch(NewException $e) {
     ob_start();

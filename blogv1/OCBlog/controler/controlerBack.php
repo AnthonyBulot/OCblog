@@ -1,4 +1,6 @@
 <?php
+namespace Blog\controler;
+
 
 class ControlerBack extends Controler
 {
@@ -6,15 +8,15 @@ class ControlerBack extends Controler
     protected $_objectComment;
     protected $_objectReport;
 
-	public function __construct()
+	public function __construct($model)
 	{
-		if (!(isset($_SESSION['password'])))
+		if (!isset($_SESSION['password']))
 		{
 			throw new NewException('Vous n\'avez pas accès à cette page', 401);
 		}
-		$this->_objectPost = New Posts();
-        $this->_objectComment = New Comments();
-        $this->_objectReport = New Report(); 
+		$this->_objectPost = $model['Posts'];
+        $this->_objectComment = $model['Comments'];
+        $this->_objectReport = $model['Report'];
 	}
 
 	public function admin(){
@@ -99,7 +101,6 @@ class ControlerBack extends Controler
 		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
             throw new NewException('Aucun identifiant de commentaire envoyé', 400);
         }
-
 		$delete = $this->_objectPost->deletePost($_GET['id']);
 		if (!$delete) {
        	 	throw new NewException('Le billet n\'a pas été supprimé !', 409);

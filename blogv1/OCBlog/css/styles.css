@@ -52,6 +52,10 @@ header
 {
 	color: black;
 }
+.lienMenu, .lienNews, .lienPage, .lienComment, .lienAdmin, .lienRaf, .lienAdminis
+{
+	color: black;
+}
 section
 {
 	margin-top: 90px;
@@ -293,18 +297,18 @@ footer
 {
 	header
 	{
-		height: 180px;
+		height: 250px;
 
 	}
 	section
 	{
-		margin-top: 190px;
+		margin-top: 270px;
 	}
 	#menu
 	{
 	position: fixed;
 	left: 5px;
-	top: 80px;
+	top: 100px;
 	}
 	.lienMenu
 	{
@@ -402,20 +406,20 @@ footer
 	}
 }
 
-@media screen and (max-width: 1000px)
+@media screen and (max-width: 1200px)
 {
 	header
 	{
-	height: 100px;
+	height: 150px;
 	}
 	section
 	{
-		margin-top: 110px;
+		margin-top: 160px;
 	}
 	#menu
 	{
 	position: fixed;
 	left: 5px;
-	top: 40px;
+	top: 60px;
 	}
 }

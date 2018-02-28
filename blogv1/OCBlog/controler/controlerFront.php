@@ -1,21 +1,26 @@
 <?php
+namespace Blog\controler;
+
 
 class ControlerFront extends Controler
 {
     protected $_objectPost;
     protected $_objectComment;
     protected $_objectReport;
+    protected $_objectAdministration;
 
 
-    public function __construct()
+    public function __construct($model)
     {
-        $this->_objectPost = New Posts();
-        $this->_objectComment = New Comments();
-        $this->_objectReport = New Report(); 
+        $this->_objectPost = $model['Posts'];
+        $this->_objectComment = $model['Comments'];
+        $this->_objectReport = $model['Report'];
+        $this->_objectAdministration = $model['Administration']; 
     }
 	public function homePosts()
 	{
     	$posts = $this->_objectPost->homePost();
+        
     	$data = [
     		'posts' => $posts
     	];
@@ -24,30 +29,54 @@ class ControlerFront extends Controler
 
 	public function getPost()
 	{
-		if (!(isset($_GET['id']) && $_GET['id'] > 0)) {
+		if (!(isset($_GET['postId']) && $_GET['postId'] > 0)) {
             throw new NewException('Aucun identifiant de billet envoyé', 400);
         }
         
-        if (isset($_GET['report'])){
+        if (isset($_GET['signalement'])){
         	$report = true;
         }
         else
         {
         	$report = null;
         }
-
-    	$post = $this->_objectPost->getPost($_GET['id']);
+    	$post = $this->_objectPost->getPost($_GET['postId']);
 
     	if (!($post->fetch())): throw new NewException("Ce post n'existe pas !", 404); 
-    	else : $post = $this->_objectPost->getPost($_GET['id']);
+    	else : $post = $this->_objectPost->getPost($_GET['postId']);
     	endif;
 
-    	$comments = $this->_objectComment->getComments($_GET['id']);
+        $totalcomment = $this->_objectComment->numberCommentsPost($_GET['postId']);
+
+        $numberPages=ceil($totalcomment/5);
+
+        if(isset($_GET['id'])) {
+            $currentPage=intval($_GET['id']);
+ 
+            if($currentPage>$numberPages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+            {
+                $currentPage=$numberPages;
+            }
+        }
+        else // Sinon
+        {
+            $currentPage = 1; // La page actuelle est la n°1    
+        }
+
+        $firstEntry=($currentPage - 1) * 5; // On calcul la première entrée à lire
+
+        $data = [
+            'id' => $_GET['postId'],
+            'first' => $firstEntry, 
+        ];
+    	$comments = $this->_objectComment->getComments($data);
     		
     	$data = [
     		'post' => $post,
     		'comments' => $comments,
-    		'report' => $report
+    		'report' => $report,
+            'numberPages' => $numberPages,
+            'currentPage' => $currentPage
     	];
     	$this->render('postView', $data);
 	}
@@ -128,7 +157,7 @@ class ControlerFront extends Controler
        	 	throw new NewException('Echec du signalement !');
     	}
     	else {
-    		header('Location: /blog/article-' . $_GET['postId'] . '/report');
+    		header('Location: /blog/article-' . $_GET['postId'] . '/signalement');
     	}
 	}
 
@@ -136,8 +165,7 @@ class ControlerFront extends Controler
 		if (empty($_POST['password'])) {
             throw new NewException('Aucun mot de passe donné', 400);
         } 
-        $objectAdministration = New Administration();
-		$dbPassword = $objectAdministration->getPassword();
+		$dbPassword = $this->_objectAdministration->getPassword();
 
 	    if (password_verify($_POST['password'], $dbPassword['password'])) {
 			$_SESSION['password'] = true;

@@ -23,7 +23,7 @@
     <h2 class="titre2">Commentaires</h2>
 
         <?php
-        if (isset($report) && $report == true){
+        if ($report == true){
             echo '<p class="info"> Le commentaire a bien été signalé ! </p>';
         }
         while ($comment = $comments->fetch())
@@ -37,6 +37,19 @@
 
         <?php
         }
+echo '<p class="numberPages">Page : '; //Pour l'affichage, on centre la liste des pages
+for($i=1; $i<=$numberPages; $i++) //On fait notre boucle
+{
+     //On va faire notre condition
+     if($i==$currentPage) //Si il s'agit de la page actuelle...
+     {
+         echo ' [ '.$i.' ] '; 
+     }  
+     else //Sinon...
+     {
+          echo ' <a class="lienPage" href="/blog/article-'. $_GET['postId'] .'/commentaire-²'.$i.'">'.$i.'</a> ';
+     }
+}
 ?>
         <form class="formComment" method="post" action="/blog/ajout-commentaire/article-<?= $data['id'] ?>">
             <p class="formCommentText">Ajouté un commentaire</p>

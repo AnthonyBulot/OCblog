@@ -1,8 +1,7 @@
 <?php
 
 $routeur = [
-	"#^/blog/article-([0-9]+)$#" => "ControlerFront@getPost",
-	"#^/blog/article-([0-9]+)/report$#" => "ControlerFront@getPost",
+	"#^/blog/article-([0-9]+)#" => "ControlerFront@getPost",
 	"#^/blog/ajout-commentaire/article-([0-9]+)$#" => "ControlerFront@addComment",
 	"#^/blog/formulaire-connexion$#" => "ControlerFront@formConnect",
 	"#^/blog/connexion$#" => "ControlerFront@connect",

@@ -1,4 +1,6 @@
 <?php
+namespace Blog\model;
+
 //Singleton
 class DbConnect
 {
@@ -34,6 +36,6 @@ class DbConnect
 		$password = $this->get("db_pass");
 		$user = $this->get("db_user");
 
-		return new PDO('mysql:host='. $host .';dbname='. $name .';charset=utf8', ''. $user .'', ''. $password .'');
+		return new \PDO('mysql:host='. $host .';dbname='. $name .';charset=utf8', ''. $user .'', ''. $password .'');
 	}
 }

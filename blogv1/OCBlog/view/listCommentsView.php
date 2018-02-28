@@ -2,7 +2,6 @@
 
 <h1 class="titre">Bienvenue sur votre Blog</h1>
 <p class="intro">Voici les commentaires les plus signalés :</p>
-<p><a class="lienRaf" href="/blog/liste-signalement">Rafraichir la page</a></p>
 
 <?php
 if (isset($_GET['delete']) && $_GET['delete'] == 1){ ?>
